@@ -11,11 +11,18 @@ export class LoginGuard implements CanActivate {
   }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     
+    console.log(window.location.pathname);
+    console.log('login => '+this._socialLoginService.getAuthStatus());
+    
     if (!this._socialLoginService.getAuthStatus()) {
       return true;
-    }
+    } 
+    // else if(window.location.pathname === '/login' && this._socialLoginService.getAuthStatus()){
+    //   return true;
+    // } 
 
-    this._router.navigate(['/login'])
+
+    this._router.navigate(['/Dashboard']);
     return false;
   }
 

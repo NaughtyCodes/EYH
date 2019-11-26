@@ -13,6 +13,8 @@ export class AuthGuardGuard implements CanActivate {
   }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     
+    console.log(window.location.pathname);
+
     if (this._socialLoginService.getAuthStatus()) {
       return true;
     }

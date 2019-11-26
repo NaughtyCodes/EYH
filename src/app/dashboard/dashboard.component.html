@@ -1,46 +1,91 @@
-<nav style="background-color: #00af66 !important" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Expand Your Hands</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">EYH<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Who We Are</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-      <a class="nav-link" style="color:white;">{{this.socialusers.name}} <span class="sr-only"></span></a>  
-      <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0" >Logout</button>  
-    </form>
-  </div>
-</nav>
-
-<!--
-<nav style="background-color: #1e7e34 !important" class="navbar navbar-expand-lg navbar-light bg-light">  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">  
-      <ul class="navbar-nav mr-auto">  
-        <li class="nav-item active">  
-          <a class="nav-link" href="#">Home <span class="sr-only"></span></a>  
-        </li>  
-        <li class="nav-item">  
-          <a class="nav-link" href="#">About</a>  
-        </li>  
-      </ul>  
-      <form class="form-inline my-2 my-lg-0">  
-          <a class="nav-link" style="color:white;">{{this.socialusers.name}} <span class="sr-only"></span></a>  
-        <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0" >Logout</button>  
-      </form>  
-    </div>  
+<nav s class="navbar navbar-expand-lg navbar-light bg-light bc-green">
+    <img class="logo-img" src="../../assets/img_avatar.png" alt="Avatar">
+    <!-- <a class="navbar-brand bc-white" href="#">Expand Your Hands</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link bc-white txt-bold" href="#">Expand-Your-Hands <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link bc-white" href="#">Who-We-Are</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled bc-white" href="#" tabindex="-1" aria-disabled="true">What-We-Do</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 bc-white" type="submit">Search</button>
+        <a class="nav-link bc-white txt-bold">{{this.socialusers.name}} <span class="sr-only"></span></a>  
+        <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Logout</button>  
+      </form>
+    </div>
   </nav>
--->
+
+
+
+<div class="container">
+    <div class="card-group">
+  
+  <div class="card" style="width:400px">
+    <img class="card-img-top" src="../../assets/img_avatar1.png" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">John Doe</h4>
+      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+  </div>
+  <br>
+  
+  
+  <div class="card" style="width:400px">
+    <div class="card-body">
+      <h4 class="card-title">Jane Doe</h4>
+      <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+    <img class="card-img-bottom" src="../../assets/img_avatar5.png" alt="Card image" style="width:100%">
+  </div>
+
+  <div class="card" style="width:400px">
+      <img class="card-img-top" src="../../assets/img_avatar1.png" alt="Card image" style="width:100%">
+      <div class="card-body">
+        <h4 class="card-title">John Doe</h4>
+        <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+        <a href="#" class="btn btn-primary">See Profile</a>
+      </div>
+    </div>
+    <br>
+    
+    
+    <div class="card" style="width:400px">
+      <div class="card-body">
+        <h4 class="card-title">Jane Doe</h4>
+        <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+        <a href="#" class="btn btn-primary">See Profile</a>
+      </div>
+      <img class="card-img-bottom" src="../../assets/img_avatar5.png" alt="Card image" style="width:100%">
+    </div>
+
+    <div class="card" style="width:400px">
+        <img class="card-img-top" src="../../assets/img_avatar1.png" alt="Card image" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title">John Doe</h4>
+          <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+          <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+      </div>
+      <br>
+      
+      
+
+</div>
+
+
+</div>

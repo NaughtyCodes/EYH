@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bc-white{
+    color: white !important;
+}
+
+.bc-gray{
+    color:#25282a !important;
+}
+
+.bc-green{
+    background: #00af66 !important;
+    color: #00af66 !important;
+}
+
+.logo-img{
+    border-radius: 50% !important;
+    width:3%;
+}
+
+.txt-bold{
+    font-weight: bold !important;
+}
+
+.card {
+    margin:1% !important;
+}

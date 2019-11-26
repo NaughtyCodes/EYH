@@ -12,6 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuardGuard } from './guards/AuthGuard/auth-guard.guard';
 import { LoginGuard } from './guards/Login/login.guard';
+import { NotfoundComponent } from './notfound/notfound.component';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -33,12 +38,13 @@ export function socialConfigs() {
   declarations: [  
     AppComponent,  
     LoginComponent,  
-    DashboardComponent  
+    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent  
   ],  
   imports: [  
     BrowserModule,  
     HttpClientModule,  
-    AppRoutingModule  
+    AppRoutingModule,
+    NgbModule 
   ],  
   providers: [  
     AuthService,  
