@@ -1,5 +1,5 @@
 <nav  *ngIf="_isLoggedIn" s class="navbar navbar-expand-lg navbar-light bg-light bc-green">
-  <img class="logo-img" src="../../assets/img_avatar.png" alt="Avatar">
+  <img class="logo-img" src="../../assets/eyh-logo.png" alt="Avatar">
   <!-- <a class="navbar-brand bc-white" href="#">Expand Your Hands</a> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,11 +19,14 @@
         <a class="nav-link bc-white" href="what-we-do" tabindex="-1" aria-disabled="true">What-We-Do</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0 login-form">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0 bc-white" type="submit">Search</button>
-      <a class="nav-link bc-white txt-bold">{{this.socialusers.name}} <span class="sr-only"></span></a>  
-      <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Logout</button>  
+      
+      <a class="nav-link bc-white txt-bold">{{this.socialusers.name}} <span class="sr-only"></span></a> 
+      <img class="user-img" src="{{this.socialusers.image}}" alt="Avatar"> 
+      <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Logout</button> 
+       
     </form>
   </div>
 </nav>

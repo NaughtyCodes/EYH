@@ -18,6 +18,16 @@
     width:3%;
 }
 
+.user-img{
+    border-radius: 50% !important;
+    width:8%;
+    margin-right:1%;
+}
+
+.login-form{
+    width:40%;
+}
+
 .txt-bold{
     font-weight: bold !important;
 }
