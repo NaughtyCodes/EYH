@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component'; 
 import { AuthGuardGuard } from './guards/AuthGuard/auth-guard.guard';
 import { LoginGuard } from './guards/Login/login.guard';
+import { WhoweareComponent } from './whoweare/whoweare.component';
+import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 
 export const routes: Routes = [    
   {    
@@ -12,11 +14,6 @@ export const routes: Routes = [
     redirectTo: 'login',    
     pathMatch: 'full' 
   },
-  // {    
-  //   path: '/',    
-  //   redirectTo: 'login',    
-  //   pathMatch: 'full' 
-  // },
   {
      path: '**', 
      redirectTo: 'NotfoundComponent'
@@ -34,13 +31,29 @@ export const routes: Routes = [
     canActivate: [LoginGuard]
   },    
   {    
-    path: 'Dashboard',    
+    path: 'dashboard',    
     component: DashboardComponent,    
     data: {    
       title: 'Dashboard Page'    
     },
     canActivate: [AuthGuardGuard]    
-  },       
+  },
+  {    
+    path: 'who-we-are',    
+    component: WhoweareComponent,    
+    data: {    
+      title: 'Who We Are'    
+    },
+    canActivate: [AuthGuardGuard]    
+  },
+  {    
+    path: 'what-we-do',    
+    component: WhatwedoComponent,    
+    data: {    
+      title: 'What We Do'    
+    },
+    canActivate: [AuthGuardGuard]    
+  }
 ];    
 @NgModule({    
   imports: [RouterModule.forRoot(routes)],    

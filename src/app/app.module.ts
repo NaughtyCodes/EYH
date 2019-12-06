@@ -17,6 +17,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { WhoweareComponent } from './whoweare/whoweare.component';
+import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -38,7 +40,7 @@ export function socialConfigs() {
   declarations: [  
     AppComponent,  
     LoginComponent,  
-    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent  
+    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent  
   ],  
   imports: [  
     BrowserModule,  

@@ -10,13 +10,17 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./login.component.css']  
 })  
 export class LoginComponent implements OnInit {  
+  
+
   response;  
     socialusers=new Socialusers();  
   constructor(  
     public OAuth: AuthService,  
     private SocialloginService: SocialloginService,  
     private router: Router  
-  ) { }  
+  ) { 
+
+  }  
   ngOnInit() {  
   }  
   public socialSignIn(socialProvider: string) {  
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
       console.log(socialProvider, socialusers);  
       console.log(socialusers); 
       this.socialusers = socialusers;
-      //this.router.navigate(['/Dashboard']);   
+      //this.router.navigate(['/dashboard']);   
       this.SavesLocalresponse(socialusers);  
     });  
   }
@@ -39,7 +43,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
       console.log(localStorage.getItem('socialusers'));
       this.SocialloginService.updateAuthStatus(true);  
-      this.router.navigate(['/Dashboard']);   
+      this.router.navigate(['/who-we-are']);   
   }
 
   Savesresponse(socialusers: Socialusers) {  
@@ -50,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.response = res.userDetail;  
       localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
       console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
-      this.router.navigate(['/Dashboard']);  
+      this.router.navigate(['/dashboard']);  
     })  
   }  
 }
