@@ -41,9 +41,9 @@
     filter: alpha(opacity=30); /* For IE8 and earlier */
     background-image: url("./assets/eyh-logo.png");
     background-color: whitesmoke;
-    height: 600px;
+    /* height: 600px; */
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-size: cover;
     position: relative;
   }
