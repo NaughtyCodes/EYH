@@ -37,7 +37,7 @@
 }
 
 .eyh-home-bg {
-    opacity: 0.2;
+    /* opacity: 0.2; */
     filter: alpha(opacity=30); /* For IE8 and earlier */
     background-image: url("./assets/eyh-logo.png");
     background-color: whitesmoke;
@@ -54,16 +54,18 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(255, 255, 255, 0.6);
 
   }
 
+.bc-lightWhite {
+    background: rgba(255, 255, 255, 0.6);
+}
+
 .eyh-home-text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 5% 10% 5% 10%;
+    transform: translate(0%, 0%);
+    
     color: #25282a;
-    -webkit-filter:brightness(10) contrast(8);
+   
   }
