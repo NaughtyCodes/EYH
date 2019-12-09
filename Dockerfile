@@ -16,6 +16,9 @@ FROM jetty as appserver
 
 COPY app.xml /var/lib/jetty/webapps/app.xml
 COPY --from=nodebuilder /app/dist /app/static/
+COPY entrypoint.sh /app/
 
-RUN java -jar $JETTY_HOME/start.jar --add-to-startd=http2 --approve-all-licenses
+RUN chmod +x /app/entrypoint.sh
+
+ENTRYPOINT /app/entrypoint.sh
 
