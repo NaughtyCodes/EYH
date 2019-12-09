@@ -12,13 +12,28 @@ COPY . /app
 
 RUN ng build --output-path=dist
 
-FROM jetty as appserver
 
-COPY app.xml /var/lib/jetty/webapps/app.xml
-COPY --from=nodebuilder /app/dist /app/static/
-COPY entrypoint.sh /app/
+FROM alpine:latest
+MAINTAINER NEHA BHARDWAJ
 
-RUN chmod +x /app/entrypoint.sh
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/jre \
+    PATH=$PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin \
+    JAVA_VERSION=8u222
 
-ENTRYPOINT /app/entrypoint.sh
+EXPOSE 8080
 
+RUN apk add --update bash wget tar openjdk8-jre && rm -rf /var/cache/apk/*
+
+# Copy Jars
+COPY --from=nodebuilder /app/dist /jetty/static_content
+COPY entrypoint.sh /
+RUN wget -q -O /jetty.tar.gz "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.15.v20190215/jetty-distribution-9.4.15.v20190215.tar.gz"
+
+# Install Jetty
+RUN tar -xvf /jetty.tar.gz && rm /jetty.tar.gz && mv jetty-distribution-9.4.15.v20190215/* /jetty
+
+COPY app.xml /jetty/webapps/
+# Clean-Up
+RUN chmod +x entrypoint.sh && apk del wget tar
+
+CMD ["/jetty/bin/jetty.sh","run"]
