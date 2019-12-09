@@ -1,1 +1,3 @@
-java -jar $JETTY_HOME/start.jar --add-to-startd=http2 --approve-all-licenses
+#!/bin/sh
+
+/jetty/bin/jetty.sh run
