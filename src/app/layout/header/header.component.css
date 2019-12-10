@@ -1,0 +1,8 @@
+@media screen and (max-width: 767px) {
+	.logo-img {
+		width: 11%
+    }
+    .user-img {
+        width: 25%;
+    }
+}

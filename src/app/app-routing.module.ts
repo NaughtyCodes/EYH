@@ -7,6 +7,7 @@ import { AuthGuardGuard } from './guards/AuthGuard/auth-guard.guard';
 import { LoginGuard } from './guards/Login/login.guard';
 import { WhoweareComponent } from './whoweare/whoweare.component';
 import { WhatwedoComponent } from './whatwedo/whatwedo.component';
+import { StoryviewComponent } from './layout/storyview/storyview.component';
 
 export const routes: Routes = [    
   {    
@@ -53,6 +54,14 @@ export const routes: Routes = [
       title: 'What We Do'    
     },
     canActivate: [AuthGuardGuard]    
+  },
+  {    
+    path: 'story/:id',    
+    component: StoryviewComponent,    
+    data: {    
+      title: 'View Story'    
+    }
+    // canActivate: [AuthGuardGuard]    
   }
 ];    
 @NgModule({    

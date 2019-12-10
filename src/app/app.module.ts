@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { WhoweareComponent } from './whoweare/whoweare.component';
 import { WhatwedoComponent } from './whatwedo/whatwedo.component';
+import { StoryviewComponent } from './layout/storyview/storyview.component';
+
+import {TreeModule} from 'primeng/tree';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -40,13 +44,15 @@ export function socialConfigs() {
   declarations: [  
     AppComponent,  
     LoginComponent,  
-    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent  
+    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent, StoryviewComponent  
   ],  
   imports: [  
     BrowserModule,  
+    BrowserAnimationsModule,
     HttpClientModule,  
     AppRoutingModule,
-    NgbModule 
+    NgbModule ,
+    TreeModule
   ],  
   providers: [  
     AuthService,  
