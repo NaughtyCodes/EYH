@@ -49,7 +49,7 @@ export const routes: Routes = [
   },
   {    
     path: 'what-we-do',    
-    component: WhatwedoComponent,    
+    component: DashboardComponent,    
     data: {    
       title: 'What We Do'    
     },
