@@ -25,6 +25,7 @@
     "classlist.js": "^1.1.20150312",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "lite-server": "^2.5.4",
     "popper.js": "^1.16.0",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.0-rc.2",
