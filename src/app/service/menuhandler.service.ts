@@ -17,7 +17,7 @@ export class MenuhandlerService {
     ) { }
 
     getFiles() {
-      return this.http.get('../../assets/mock/tree-menu.json');
+      return this.http.get('./assets/mock/tree-menu.json');
                   // .toPromise()
                   // .then(res => {
                   //   console.log(JSON.stringify(res));
