@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +61,11 @@ export function socialConfigs() {
       provide: AuthServiceConfig,  
       useFactory: socialConfigs  
     }, LoginGuard,
-    AuthGuardGuard
+    AuthGuardGuard,
+    {
+      provide: LocationStrategy, 
+      useClass: PathLocationStrategy
+    }
   ],  
   bootstrap: [AppComponent]  
 })  
