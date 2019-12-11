@@ -62,6 +62,13 @@ export const routes: Routes = [
       title: 'View Story'    
     }
     // canActivate: [AuthGuardGuard]    
+  },
+  {    
+    path: 'reach-us',    
+    component: NotfoundComponent,    
+    data: {    
+      title: 'Reach Us'    
+    }
   }
 ];    
 @NgModule({    

@@ -18,6 +18,9 @@ export class StoryviewComponent implements OnInit {
     this.menuhandlerService.getFiles().subscribe(data => {
       this.files = <TreeNode[]> data['data'];
       console.log(JSON.stringify(data));
+    }, 
+    errorCode => {
+      console.log(errorCode);
     });
   }
 
