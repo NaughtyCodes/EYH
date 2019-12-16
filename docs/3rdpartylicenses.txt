@@ -176,6 +176,10 @@ SOFTWARE.
 primeng
 MIT
 
+primeng/menu
+
+primeng/tabmenu
+
 primeng/tree
 
 regenerator-runtime
