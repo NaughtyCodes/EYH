@@ -24,6 +24,9 @@ import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { StoryviewComponent } from './layout/storyview/storyview.component';
 
 import {TreeModule} from 'primeng/tree';
+import {MenuModule} from 'primeng/menu';
+import {TabMenuModule} from 'primeng/tabmenu';
+import { UpdateEventsComponent } from './update-events/update-events.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -45,7 +48,7 @@ export function socialConfigs() {
   declarations: [  
     AppComponent,  
     LoginComponent,  
-    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent, StoryviewComponent  
+    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent, StoryviewComponent, UpdateEventsComponent  
   ],  
   imports: [  
     BrowserModule,  
@@ -53,7 +56,9 @@ export function socialConfigs() {
     HttpClientModule,  
     AppRoutingModule,
     NgbModule ,
-    TreeModule
+    TreeModule,
+    MenuModule,
+    TabMenuModule
   ],  
   providers: [  
     AuthService,  

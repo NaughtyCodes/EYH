@@ -9,6 +9,15 @@ import { SocialloginService } from './service/sociallogin.service';
 })
 export class AppComponent {
   title = 'eyh';
-  constructor() {}
+  _isLoggedIn: boolean = false;
+  constructor(
+    private SocialloginService: SocialloginService
+  ) {
+    this._isLoggedIn = this.SocialloginService.getAuthStatus(); 
+  }
   
+  ngOnInit() {  
+    this._isLoggedIn = this.SocialloginService.getAuthStatus(); 
+  }  
+
 }

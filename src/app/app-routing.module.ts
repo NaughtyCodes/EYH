@@ -8,6 +8,7 @@ import { LoginGuard } from './guards/Login/login.guard';
 import { WhoweareComponent } from './whoweare/whoweare.component';
 import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { StoryviewComponent } from './layout/storyview/storyview.component';
+import { UpdateEventsComponent } from './update-events/update-events.component';
 
 export const routes: Routes = [    
   {    
@@ -69,6 +70,14 @@ export const routes: Routes = [
     data: {    
       title: 'Reach Us'    
     }
+  },
+  {    
+    path: 'update-events',    
+    component: UpdateEventsComponent,    
+    data: {    
+      title: 'Update Events'    
+    },
+    canActivate: [AuthGuardGuard]  
   }
 ];    
 @NgModule({    

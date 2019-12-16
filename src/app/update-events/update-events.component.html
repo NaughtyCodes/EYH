@@ -1,0 +1,28 @@
+<!-- <app-header></app-header> -->
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <h3>Manage Menu</h3>
+        <p-menu [model]="items"></p-menu>
+      </div>
+      <div class="col-sm-9">
+          <div class="row tab-menu-row">
+              <p-tabMenu [model]="manageStoryItems">
+                  <ng-template pTemplate="item" let-item let-i="index">
+                      {{item.label}}
+                  </ng-template>
+              </p-tabMenu>
+          </div>
+          <div class="row">
+            <table class="list-story-table">
+              <tr *ngFor="let story of storys">
+                <td>{{story.storyTitle}}</td>
+                <td><i class="pi pi-pencil"></i></td>
+                <td><i class="pi pi-times"></i></td>
+              </tr>
+            </table>
+          </div>
+         
+      </div>
+    </div>
+  </div>
