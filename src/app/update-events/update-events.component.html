@@ -15,10 +15,19 @@
           </div>
           <div class="row">
             <table class="list-story-table">
+              <tr>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Story</th>
+              </tr>
               <tr *ngFor="let story of storys">
-                <td>{{story.storyTitle}}</td>
-                <td><i class="pi pi-pencil"></i></td>
+                <td><><i class="pi pi-pencil"></i></td>
                 <td><i class="pi pi-times"></i></td>
+                <td>{{story.id}}</td>
+                <td>{{story.storyTitle}}</td>
+                <td>{{story.story}}</td>
               </tr>
             </table>
           </div>
