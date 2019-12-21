@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+
 import {MenuItem} from 'primeng/api';
 import { StoryhandlerService } from '../service/storyhandler.service';
 import { Story } from '../models/story';
@@ -9,19 +11,26 @@ import { Story } from '../models/story';
   templateUrl: './update-events.component.html',
   styleUrls: ['./update-events.component.css']
 })
-export class UpdateEventsComponent implements OnInit {
+export class UpdateEventsComponent {
 
   storys: Story;
+  activeItem: MenuItem;
+  storyForm: FormGroup;
+  display: boolean = false;
   items: MenuItem[];
   manageStoryItems: MenuItem[];
-  activeItem: MenuItem;
 
   constructor(
     private storyhandlerService: StoryhandlerService, 
-  ) { }
+    private formBuilder: FormBuilder
+  ) { 
+    this.createStoryUpdateForm();
+  }
 
   ngOnInit() {
 
+      this.listStorys();
+      
       this.items = [
         {
           label: 'Manage-Story', 
@@ -55,6 +64,13 @@ export class UpdateEventsComponent implements OnInit {
 
   }
 
+  createStoryUpdateForm() {
+    this.storyForm = this.formBuilder.group({
+      storyTitle: [''],
+      story: ['']
+    });
+  }
+
   manageStory() {
     this.listStorys();
   }
@@ -69,8 +85,13 @@ export class UpdateEventsComponent implements OnInit {
     });
   }
 
-  editStory() {
-    
+  editStory($event,story) {
+    //alert(story);
+    this.display = true;
+  }
+
+  updateStory($event){
+    alert($event.toElement.form.elements.story.value);
   }
 
   deleteStory() {

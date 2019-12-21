@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,16 +17,18 @@ import { AuthGuardGuard } from './guards/AuthGuard/auth-guard.guard';
 import { LoginGuard } from './guards/Login/login.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { WhoweareComponent } from './whoweare/whoweare.component';
 import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { StoryviewComponent } from './layout/storyview/storyview.component';
 
-import {TreeModule} from 'primeng/tree';
-import {MenuModule} from 'primeng/menu';
-import {TabMenuModule} from 'primeng/tabmenu';
+import { TreeModule} from 'primeng/tree';
+import { MenuModule} from 'primeng/menu';
+import { TabMenuModule} from 'primeng/tabmenu';
+import { DialogModule } from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
 import { UpdateEventsComponent } from './update-events/update-events.component';
 
 export function socialConfigs() {  
@@ -58,7 +61,10 @@ export function socialConfigs() {
     NgbModule ,
     TreeModule,
     MenuModule,
-    TabMenuModule
+    TabMenuModule,
+    DialogModule,
+    InputTextModule,
+    ReactiveFormsModule
   ],  
   providers: [  
     AuthService,  
