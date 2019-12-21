@@ -176,6 +176,10 @@ SOFTWARE.
 primeng
 MIT
 
+primeng/api
+
+primeng/dialog
+
 primeng/menu
 
 primeng/tabmenu
