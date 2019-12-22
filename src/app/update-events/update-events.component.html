@@ -44,9 +44,12 @@
                     <label for="story">Story:</label>
                     <textarea class="form-control" name="story" formControlName="story" rows="10" id="story"></textarea>
                   </div>
-                  <button type="submit" (click)="updateStory($event);" class="btn btn-primary">Update</button>
+                  
+                  <input type="file" formControlName="image" (change)="onFileChange($event)" />
       
-                  <button style="margin-left:1%" type="submit" (click)="updateStory($event);" class="btn btn-primary">Clear</button>
+                  <button style="margin-left:1%" type="submit" (click)="updateStory($event);" class="btn btn-primary">Update</button>
+                  <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+
                 </form>
               <!-- <p-footer></p-footer> --> 
             </p-dialog>

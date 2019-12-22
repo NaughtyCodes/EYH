@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import {MenuItem} from 'primeng/api';
 import { StoryhandlerService } from '../service/storyhandler.service';
@@ -22,7 +22,8 @@ export class UpdateEventsComponent {
 
   constructor(
     private storyhandlerService: StoryhandlerService, 
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cd: ChangeDetectorRef
   ) { 
     this.createStoryUpdateForm();
   }
@@ -67,7 +68,8 @@ export class UpdateEventsComponent {
   createStoryUpdateForm() {
     this.storyForm = this.formBuilder.group({
       storyTitle: [''],
-      story: ['']
+      story: [''],
+      image: [null, Validators.required]
     });
   }
 
@@ -91,7 +93,30 @@ export class UpdateEventsComponent {
   }
 
   updateStory($event){
-    alert($event.toElement.form.elements.story.value);
+    console.log(JSON.stringify(this.storyForm.value));
+  }
+
+  clearForm($event){
+    this.storyForm.reset();
+  }
+
+  onFileChange($event) {
+
+    const reader = new FileReader();
+ 
+    if($event.target.files && $event.target.files.length) {
+      const [file] = $event.target.files;
+      reader.readAsDataURL(file);
+  
+      reader.onload = () => {
+        this.storyForm.patchValue({
+          file: reader.result
+       });
+       
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
   }
 
   deleteStory() {
