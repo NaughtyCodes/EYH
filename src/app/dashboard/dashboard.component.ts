@@ -10,7 +10,7 @@ import { StoryhandlerService } from '../service/storyhandler.service';
 })  
 export class DashboardComponent implements OnInit {  
 
-  storys: Story;
+  stories: Story[];
 
   constructor(
     public OAuth: AuthService,
@@ -18,9 +18,9 @@ export class DashboardComponent implements OnInit {
     private router: Router
     ) { }  
   ngOnInit() {  
-    this.storyhandlerService.getStorys().subscribe(data => {
-      console.log(JSON.stringify(data));
-      this.storys =  data['data'];
+    this.storyhandlerService.getStories().subscribe(data => {
+      this.stories = this.storyhandlerService.storyMapper(data);
+      console.log(JSON.stringify(this.stories));
     }, 
     errorCode => {
       console.log(errorCode);

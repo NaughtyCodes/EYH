@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { StoryhandlerService } from '../service/storyhandler.service';
+import { FirebaseService } from '../service/firebase.service';
 import { Story } from '../models/story';
 
 
@@ -13,7 +14,7 @@ import { Story } from '../models/story';
 })
 export class UpdateEventsComponent {
 
-  storys: Story;
+  stories: Story[];
   activeItem: MenuItem;
   storyForm: FormGroup;
   display: boolean = false;
@@ -21,7 +22,8 @@ export class UpdateEventsComponent {
   manageStoryItems: MenuItem[];
 
   constructor(
-    private storyhandlerService: StoryhandlerService, 
+    private storyhandlerService: StoryhandlerService,
+    private firebaseService: FirebaseService, 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef
   ) { 
@@ -78,9 +80,9 @@ export class UpdateEventsComponent {
   }
 
   listStorys() {
-    this.storyhandlerService.getStorys().subscribe(data => {
-      console.log(JSON.stringify(data));
-      this.storys =  data['data'];
+    this.storyhandlerService.getStories().subscribe(data => {
+      this.stories = this.storyhandlerService.storyMapper(data);
+      console.log(JSON.stringify(this.stories));
     }, 
     errorCode => {
       console.log(errorCode);
@@ -100,6 +102,7 @@ export class UpdateEventsComponent {
     this.storyForm.reset();
   }
 
+/*
   onFileChange($event) {
 
     const reader = new FileReader();
@@ -118,6 +121,7 @@ export class UpdateEventsComponent {
       };
     }
   }
+*/
 
   deleteStory() {
 

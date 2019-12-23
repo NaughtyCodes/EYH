@@ -28,8 +28,14 @@ import { TreeModule} from 'primeng/tree';
 import { MenuModule} from 'primeng/menu';
 import { TabMenuModule} from 'primeng/tabmenu';
 import { DialogModule } from 'primeng/dialog';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
 import { UpdateEventsComponent } from './update-events/update-events.component';
+
+import { environment } from '../environments/environment';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -64,19 +70,23 @@ export function socialConfigs() {
     TabMenuModule,
     DialogModule,
     InputTextModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],  
   providers: [  
-    AuthService,  
+    AuthService,
+    AuthGuardGuard,
+    LoginGuard,
     {  
       provide: AuthServiceConfig,  
       useFactory: socialConfigs  
-    }, LoginGuard,
-    AuthGuardGuard,
+    }, 
     {
       provide: LocationStrategy, 
       useClass: PathLocationStrategy
-    }
+    }  
   ],  
   bootstrap: [AppComponent]  
 })  
