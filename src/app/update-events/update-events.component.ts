@@ -98,7 +98,7 @@ export class UpdateEventsComponent {
     console.log(JSON.stringify(this.storyForm.value));
   }
 
-  clearForm($event){
+  clearForm(){
     this.storyForm.reset();
   }
 
