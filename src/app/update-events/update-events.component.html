@@ -6,6 +6,7 @@
         <p-menu [model]="items"></p-menu>
       </div>
       <div class="col-sm-9">
+        <h3 style="margin-left: -16px;">EYH - Stroy Table</h3>
           <div class="row tab-menu-row">
               <p-tabMenu [model]="manageStoryItems">
                   <ng-template pTemplate="item" let-item let-i="index">
@@ -24,7 +25,7 @@
               </tr>
               <tr *ngFor="let story of stories">
                 <td><button class="btn" (click)="editStory($event,story);"><i class="pi pi-pencil"></i></button></td>
-                <td><button class="btn"><i class="pi pi-times"></i></button></td>
+                <td><button class="btn" (click)="deleteStory($event,story);"><i class="pi pi-times"></i></button></td>
                 <td>{{story.id}}</td>
                 <td>{{story.storyTitle}}</td>
                 <td>{{story.story}}</td>

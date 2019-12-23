@@ -95,6 +95,8 @@ export class UpdateEventsComponent {
   editStory($event,story) {
     this.storyFromTitle = "Edit / Update Story";
     this.storyFormDisplay = true;
+    this.storyForm.controls['storyTitle'].setValue(story.storyTitle);
+    this.storyForm.controls['story'].setValue(story.story);
   }
 
   updateStory($event){
@@ -111,6 +113,8 @@ export class UpdateEventsComponent {
       this.storyForm.reset();
       this.base64ImageData="";
       this.storyFormDisplay=false;
+    },errorCode => {
+      console.log(errorCode);
     });
   }
 
@@ -139,8 +143,16 @@ export class UpdateEventsComponent {
     }
   }
 
-  deleteStory() {
-
-  }
+  deleteStory($event,story) {
+    console.log('Deleting the story id => '+story.id);
+    this.storyhandlerService.deleteStory(story.id).then( _ => {
+      alert('Deleted the story id => '+story.id);
+      this.storyForm.reset();
+      this.base64ImageData="";
+      this.storyFormDisplay=false;
+    }, errorCode => {
+      console.log(errorCode);
+    });
+ }
 
 }

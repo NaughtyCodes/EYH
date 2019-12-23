@@ -42,15 +42,11 @@ export class StoryhandlerService {
   
     updateStory(story: Story){
       delete story.id;
-      this.firestore.doc('storys/' + story.id).update(story);
+      return this.firestore.doc('eyh-stories/' + story.id).update(story);
     }
   
     deleteStory(storyId: string){
-      this.firestore.doc('storys/' + storyId).delete();
+      return this.firestore.doc('eyh-stories/' + storyId).delete();
     }
-
-    // getStorys() {
-    //   return this.http.get('./assets/mock/storys.json');
-    // }
 
 }

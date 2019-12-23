@@ -5,3 +5,27 @@
 .tab-menu-row {
     margin-bottom: 2%;
 }
+
+
+table > tr:first-child {
+    background-color: #00af66 !important;
+    color: white !important;
+    height:45px;
+}
+
+table > tr > th:first-child {
+    padding-left: 2%;
+}
+
+table > tr:not(:first-child) {
+ color: #25282a;   
+}
+
+table > tr:nth-child(even) {
+    background: #f7f5f5;
+}
+
+table > tr:nth-child(odd) {
+    background: #FFF;
+}
+
