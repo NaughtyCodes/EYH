@@ -36,7 +36,8 @@ export class StoryhandlerService {
     }
   
     createStory(story: Story){
-      return this.firestore.collection('eyh-stories').add(Story);
+      console.log(JSON.parse(JSON.stringify(story)));
+      return this.firestore.collection('eyh-stories').add(story);
     }
   
     updateStory(story: Story){

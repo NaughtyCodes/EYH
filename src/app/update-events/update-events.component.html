@@ -31,9 +31,9 @@
               </tr>
             </table>
 
-            <p-dialog [(visible)]="display" [style]="{width: '80%', height: '500px'}">
+            <p-dialog [(visible)]="storyFormDisplay" [style]="{width: '80%', height: '500px'}">
               <p-header>
-                  Edit / Update Story
+                  {{storyFromTitle}}
               </p-header>
                 <form [formGroup]="storyForm">
                   <div class="form-group">
@@ -45,8 +45,8 @@
                     <textarea class="form-control" name="story" formControlName="story" rows="10" id="story"></textarea>
                   </div>
                   
-                  <!-- <input type="file" formControlName="image" (change)="onFileChange($event)" /> -->
-                  <input type="file" formControlName="image" />
+                  <input type="file" formControlName="image" (change)="onFileChange($event)" />
+                  <!-- <input type="file" formControlName="image" /> -->
       
                   <button style="margin-left:1%" type="submit" (click)="updateStory($event);" class="btn btn-primary">Update</button>
                   <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>

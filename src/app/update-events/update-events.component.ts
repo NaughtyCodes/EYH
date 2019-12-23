@@ -5,6 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { StoryhandlerService } from '../service/storyhandler.service';
 import { FirebaseService } from '../service/firebase.service';
 import { Story } from '../models/story';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -17,9 +18,11 @@ export class UpdateEventsComponent {
   stories: Story[];
   activeItem: MenuItem;
   storyForm: FormGroup;
-  display: boolean = false;
+  storyFormDisplay: boolean = false;
   items: MenuItem[];
   manageStoryItems: MenuItem[];
+  base64ImageData = "";
+  storyFromTitle = "";
 
   constructor(
     private storyhandlerService: StoryhandlerService,
@@ -60,7 +63,8 @@ export class UpdateEventsComponent {
           label: 'Add New Story', 
           icon: 'fa fa-fw fa-calendar',
           command: (event) => {
-      
+            this.storyFromTitle = "Add A New Story";
+            this.storyFormDisplay = true;
           }
         }
     ];
@@ -82,7 +86,6 @@ export class UpdateEventsComponent {
   listStorys() {
     this.storyhandlerService.getStories().subscribe(data => {
       this.stories = this.storyhandlerService.storyMapper(data);
-      console.log(JSON.stringify(this.stories));
     }, 
     errorCode => {
       console.log(errorCode);
@@ -90,19 +93,31 @@ export class UpdateEventsComponent {
   }
 
   editStory($event,story) {
-    //alert(story);
-    this.display = true;
+    this.storyFromTitle = "Edit / Update Story";
+    this.storyFormDisplay = true;
   }
 
   updateStory($event){
-    console.log(JSON.stringify(this.storyForm.value));
+    let story: Story;
+    story = {
+      'hasImage': this.base64ImageData !== "" ? 'Y' : 'N',  
+      'imageData': this.base64ImageData !== "" ? this.base64ImageData : "", 
+      'storyTitle': this.storyForm.value['storyTitle'],  
+      'story': this.storyForm.value['story'],
+      'timestamp': formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530')     
+    }
+    this.storyhandlerService.createStory(story).then( _ => {
+      alert("Record Inserted..!");
+      this.storyForm.reset();
+      this.base64ImageData="";
+      this.storyFormDisplay=false;
+    });
   }
 
   clearForm(){
     this.storyForm.reset();
   }
 
-/*
   onFileChange($event) {
 
     const reader = new FileReader();
@@ -115,13 +130,14 @@ export class UpdateEventsComponent {
         this.storyForm.patchValue({
           file: reader.result
        });
-       
+
+       this.base64ImageData = reader.result.toString();
+
         // need to run CD since file load runs outside of zone
         this.cd.markForCheck();
       };
     }
   }
-*/
 
   deleteStory() {
 

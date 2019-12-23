@@ -1,5 +1,5 @@
-export class Story {  
-    id: String;  
+export interface  Story {  
+    id?: String;  
     hasImage: string;  
     imageData: string;  
     storyTitle: string;  
