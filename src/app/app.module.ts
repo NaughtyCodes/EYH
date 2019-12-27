@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';  
@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SessionService } from './service/session.service';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -57,7 +58,14 @@ export function socialConfigs() {
   declarations: [  
     AppComponent,  
     LoginComponent,  
-    DashboardComponent, NotfoundComponent, HeaderComponent, FooterComponent, WhoweareComponent, WhatwedoComponent, StoryviewComponent, UpdateEventsComponent  
+    DashboardComponent, 
+    NotfoundComponent, 
+    HeaderComponent, 
+    FooterComponent, 
+    WhoweareComponent, 
+    WhatwedoComponent, 
+    StoryviewComponent, 
+    UpdateEventsComponent  
   ],  
   imports: [  
     BrowserModule,  
@@ -76,6 +84,7 @@ export function socialConfigs() {
     AngularFirestoreModule
   ],  
   providers: [  
+    SessionService,
     AuthService,
     AuthGuardGuard,
     LoginGuard,
@@ -90,4 +99,7 @@ export function socialConfigs() {
   ],  
   bootstrap: [AppComponent]  
 })  
-export class AppModule { }
+export class AppModule {
+
+
+}

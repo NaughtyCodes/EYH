@@ -218,8 +218,6 @@ primeng/menu
 
 primeng/tabmenu
 
-primeng/tree
-
 regenerator-runtime
 MIT
 MIT License

@@ -7,7 +7,8 @@
       <div class="card-body">
         <h4 class="card-title">{{story.storyTitle}}</h4>
         <p class="card-text">{{story.story}}</p>
-        <a href="story/{{story.id}}" class="btn btn-primary">Click to read more</a>
+        <a (click)="viewStoryHandler(story,stories)" href="story/{{story.id}}" class="btn btn-primary">Click to read more</a>
+        <!-- <a href="story/{{story.id}}" class="btn btn-primary">Click to read more</a> -->
       </div>
     </div>
 

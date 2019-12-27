@@ -46,6 +46,7 @@
     background-repeat: repeat-y;
     background-size: cover;
     position: relative;
+    min-height: 700px;
   }
 
   .eyh-home-bg:before{ content: '';
