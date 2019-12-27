@@ -3,10 +3,10 @@
   <div class="card-group">
 
     <div *ngFor="let story of stories" class="card" style="max-width: 18rem;">
-      <img class="card-img-top" src="./assets/img_avatar1.png" alt="Card image" style="width:100%">
+      <img class="card-img-top" src="{{story.imageData}}" alt="Card image" style="width:100%">
       <div class="card-body">
         <h4 class="card-title">{{story.storyTitle}}</h4>
-        <p class="card-text">{{story.story}}</p>
+        <p class="card-text">{{story.story | slice:0:50}}</p>
         <a (click)="viewStoryHandler(story,stories)" href="story/{{story.id}}" class="btn btn-primary">Click to read more</a>
         <!-- <a href="story/{{story.id}}" class="btn btn-primary">Click to read more</a> -->
       </div>

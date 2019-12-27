@@ -40,9 +40,8 @@ export class StoryhandlerService {
       return this.firestore.collection('eyh-stories').add(story);
     }
   
-    updateStory(story: Story){
-      delete story.id;
-      return this.firestore.doc('eyh-stories/' + story.id).update(story);
+    updateStory(storyId: string, story: Story){
+      return this.firestore.collection('eyh-stories').doc(storyId).update(story);
     }
   
     deleteStory(storyId: string){

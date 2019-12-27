@@ -16,17 +16,15 @@ export class StoryviewComponent implements OnInit {
   routeParam: any;
   stories: any;
   story: Story;
-  sessionService: SessionService;
 
   constructor(
       private menuhandlerService: MenuhandlerService,
-    ) {
-      this.sessionService = SessionService.getInstance();
-     }
+      private sessionService: SessionService
+    ) {}
 
   ngOnInit() {
 
-    this.routeParam = this.sessionService.getParamObj();
+    this.routeParam = JSON.parse(this.sessionService.getParamObj());
     //this.routeParam = AppInjector.get(SessionService).getParamObj();
      this.stories    = this.routeParam["stories"];
      this.story      = this.routeParam["story"];

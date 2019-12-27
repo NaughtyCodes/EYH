@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
       "story": story,
       "stories": stories
     };
-    this.sessionService.setParamObj(paramObject);
+    this.sessionService.setParamObj(JSON.stringify(paramObject));
     //console.log(JSON.stringify(this.sessionService.getParamObj()));
   }
 

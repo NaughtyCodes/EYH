@@ -23,6 +23,8 @@ export class UpdateEventsComponent {
   manageStoryItems: MenuItem[];
   base64ImageData = "";
   storyFromTitle = "";
+  isUpdate = false;
+  selectedStory = {};
 
   constructor(
     private storyhandlerService: StoryhandlerService,
@@ -72,10 +74,11 @@ export class UpdateEventsComponent {
   }
 
   createStoryUpdateForm() {
+    this.isUpdate = false;
     this.storyForm = this.formBuilder.group({
       storyTitle: [''],
       story: [''],
-      image: [null, Validators.required]
+      image: ['']
     });
   }
 
@@ -93,29 +96,44 @@ export class UpdateEventsComponent {
   }
 
   editStory($event,story) {
+    this.isUpdate = true;
+    this.selectedStory = story;
     this.storyFromTitle = "Edit / Update Story";
     this.storyFormDisplay = true;
     this.storyForm.controls['storyTitle'].setValue(story.storyTitle);
     this.storyForm.controls['story'].setValue(story.story);
+    this.base64ImageData = story.imageData !== "" ? story.imageData : "";
   }
 
   updateStory($event){
     let story: Story;
     story = {
       'hasImage': this.base64ImageData !== "" ? 'Y' : 'N',  
-      'imageData': this.base64ImageData !== "" ? this.base64ImageData : "", 
+      'imageData': this.base64ImageData,
       'storyTitle': this.storyForm.value['storyTitle'],  
       'story': this.storyForm.value['story'],
       'timestamp': formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530')     
     }
-    this.storyhandlerService.createStory(story).then( _ => {
-      alert("Record Inserted..!");
-      this.storyForm.reset();
-      this.base64ImageData="";
-      this.storyFormDisplay=false;
-    },errorCode => {
-      console.log(errorCode);
-    });
+
+    if(this.isUpdate){
+      this.storyhandlerService.updateStory(this.selectedStory['id'],story).then( _ => {
+        alert("Record Updated..!");
+        this.storyForm.reset();
+        this.base64ImageData="";
+        this.storyFormDisplay=false;
+      },errorCode => {
+        console.log(errorCode);
+      });
+    } else {
+      this.storyhandlerService.createStory(story).then( _ => {
+        alert("Record Inserted..!");
+        this.storyForm.reset();
+        this.base64ImageData="";
+        this.storyFormDisplay=false;
+      },errorCode => {
+        console.log(errorCode);
+      });
+    } 
   }
 
   clearForm(){
