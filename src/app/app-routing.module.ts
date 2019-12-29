@@ -9,6 +9,7 @@ import { WhoweareComponent } from './whoweare/whoweare.component';
 import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { StoryviewComponent } from './layout/storyview/storyview.component';
 import { UpdateEventsComponent } from './update-events/update-events.component';
+import { ReachUsComponent } from './reach-us/reach-us.component';
 
 export const routes: Routes = [    
   {    
@@ -66,7 +67,7 @@ export const routes: Routes = [
   },
   {    
     path: 'reach-us',    
-    component: NotfoundComponent,    
+    component: ReachUsComponent,    
     data: {    
       title: 'Reach Us'    
     }

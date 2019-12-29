@@ -1,0 +1,7 @@
+.contact-txt{
+    font-size:20px;
+    -ms-transform: translate(0%, 0%); /* IE 9 */
+    -webkit-transform: translate(0%, 0%); /* Safari prior 9.0 */
+    transform: translate(0%, 0%);
+    color:#25282a;
+}

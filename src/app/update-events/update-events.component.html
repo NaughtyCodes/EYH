@@ -28,7 +28,7 @@
                 <td><button class="btn" (click)="deleteStory($event,story);"><i class="pi pi-times"></i></button></td>
                 <td>{{story.id}}</td>
                 <td>{{story.storyTitle}}</td>
-                <td>{{story.story}}</td>
+                <td>{{story.story | slice:0:200}}</td>
               </tr>
             </table>
 

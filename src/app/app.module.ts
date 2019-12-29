@@ -38,6 +38,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SessionService } from './service/session.service';
 
+import { ReachUsComponent } from './reach-us/reach-us.component';
+
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
     [  
@@ -65,7 +67,7 @@ export function socialConfigs() {
     WhoweareComponent, 
     WhatwedoComponent, 
     StoryviewComponent, 
-    UpdateEventsComponent  
+    UpdateEventsComponent, ReachUsComponent  
   ],  
   imports: [  
     BrowserModule,  

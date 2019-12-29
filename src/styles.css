@@ -65,6 +65,8 @@
 
 .eyh-home-text {
     padding: 5% 10% 5% 10%;
+    -ms-transform: translate(0%, 0%); /* IE 9 */
+    -webkit-transform: translate(0%, 0%); /* Safari prior 9.0 */
     transform: translate(0%, 0%);
     
     color: #25282a;

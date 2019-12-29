@@ -40,6 +40,7 @@ export class UpdateEventsComponent {
       this.listStorys();
       
       this.items = [
+        {label: 'Upcoming-Events', icon: 'pi pi-globe'},
         {
           label: 'Manage-Story', 
           icon:  'pi pi-pencil',
@@ -48,8 +49,10 @@ export class UpdateEventsComponent {
 
           }
         },
-        {label: 'Manage-Info', icon: 'pi pi-info-circle'},
-        {label: 'Manage-Contact', icon: 'pi pi-globe'}
+        {label: 'Home-Info', icon: 'pi pi-info-circle'},
+        {label: 'Your-Contribution', icon: 'pi pi-globe'},
+        {label: 'Contribute-To-EYH', icon: 'pi pi-globe'},
+        {label: 'Join-To-EYH', icon: 'pi pi-globe'}
       ];
 
       this.manageStoryItems = [
@@ -145,7 +148,8 @@ export class UpdateEventsComponent {
     const reader = new FileReader();
  
     if($event.target.files && $event.target.files.length) {
-      const [file] = $event.target.files;
+      let [file] = $event.target.files;
+
       reader.readAsDataURL(file);
   
       reader.onload = () => {
