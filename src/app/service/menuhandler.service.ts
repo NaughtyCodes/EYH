@@ -22,6 +22,23 @@ export class MenuhandlerService {
                   // .then(res => {
                   //   console.log(JSON.stringify(res));
                   // });
-  }
+    }
+
+    active($event: any) {
+      this.clearClass(".tab-menu-view","active-tab");
+      this.addClass("[for="+$event.item.label+"]","active-tab");
+    }
+
+    clearClass(queryClassName :any, removeClassName :any) {
+      window.document.querySelectorAll(queryClassName).forEach((e,i)=>{
+        e.classList.remove(removeClassName);
+      });
+    }
+
+    addClass(queryClassName :any, removeClassName :any) {
+      window.document.querySelectorAll(queryClassName).forEach((e,i)=>{
+        e.classList.add(removeClassName);
+      });
+    }
 
 }

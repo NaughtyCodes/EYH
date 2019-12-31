@@ -72,3 +72,11 @@
     color: #25282a;
    
   }
+
+  .hide-tab {
+      display: none;
+  }
+
+  .active-tab {
+      display: block;
+  }

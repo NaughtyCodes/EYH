@@ -12,6 +12,7 @@
 
  @media screen and (max-width: 767px) {
     .footer-mobile {
-        position: unset !important;
+        /* position: unset !important; */
+
     }
  }

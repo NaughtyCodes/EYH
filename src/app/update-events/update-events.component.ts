@@ -6,6 +6,7 @@ import { StoryhandlerService } from '../service/storyhandler.service';
 import { FirebaseService } from '../service/firebase.service';
 import { Story } from '../models/story';
 import { formatDate } from '@angular/common';
+import { MenuhandlerService } from '../service/menuhandler.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class UpdateEventsComponent {
 
   constructor(
     private storyhandlerService: StoryhandlerService,
-    private firebaseService: FirebaseService, 
+    private firebaseService: FirebaseService,
+    private menuhandlerService: MenuhandlerService,
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef
   ) { 
@@ -37,22 +39,53 @@ export class UpdateEventsComponent {
 
   ngOnInit() {
 
-      this.listStorys();
+      
+
+      //this.listStorys();
       
       this.items = [
-        {label: 'Upcoming-Events', icon: 'pi pi-globe'},
+        {
+          label: 'Upcoming-Events', 
+          icon: 'pi pi-globe',
+          command: ($event) => {
+            this.menuhandlerService.active($event);
+          }
+        },
         {
           label: 'Manage-Story', 
           icon:  'pi pi-pencil',
-          command: (event) => {
-            this.listStorys();
-
+          command: ($event) => {
+            this.menuhandlerService.active($event);
           }
         },
-        {label: 'Home-Info', icon: 'pi pi-info-circle'},
-        {label: 'Your-Contribution', icon: 'pi pi-globe'},
-        {label: 'Contribute-To-EYH', icon: 'pi pi-globe'},
-        {label: 'Join-To-EYH', icon: 'pi pi-globe'}
+        {
+          label: 'Home-Info', 
+          icon: 'pi pi-info-circle',
+          command: ($event) => {
+            this.menuhandlerService.active($event);
+          }
+        },
+        {
+          label: 'Your-Contribution', 
+          icon: 'pi pi-globe',
+          command: ($event) => {
+            this.menuhandlerService.active($event);
+          }
+        },
+        {
+          label: 'Contribute-To-EYH', 
+          icon: 'pi pi-globe',
+          command: ($event) => {
+            this.menuhandlerService.active($event);
+          }
+        },
+        {
+          label: 'Join-To-EYH', 
+          icon: 'pi pi-globe',
+          command: ($event) => {
+            this.menuhandlerService.active($event);
+          }
+        }
       ];
 
       this.manageStoryItems = [
@@ -68,6 +101,7 @@ export class UpdateEventsComponent {
           label: 'Add New Story', 
           icon: 'fa fa-fw fa-calendar',
           command: (event) => {
+            this.storyForm.reset();
             this.storyFromTitle = "Add A New Story";
             this.storyFormDisplay = true;
           }
@@ -120,16 +154,16 @@ export class UpdateEventsComponent {
 
     if(this.isUpdate){
       this.storyhandlerService.updateStory(this.selectedStory['id'],story).then( _ => {
-        alert("Record Updated..!");
-        this.storyForm.reset();
+        console.log("Record Updated..!");
         this.base64ImageData="";
         this.storyFormDisplay=false;
       },errorCode => {
         console.log(errorCode);
       });
     } else {
+      this.storyForm.reset();
       this.storyhandlerService.createStory(story).then( _ => {
-        alert("Record Inserted..!");
+        console.log("Record Inserted..!");
         this.storyForm.reset();
         this.base64ImageData="";
         this.storyFormDisplay=false;

@@ -39,6 +39,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SessionService } from './service/session.service';
 
 import { ReachUsComponent } from './reach-us/reach-us.component';
+import { HomesInfoComponent } from './homes-info/homes-info.component';
+import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
+import { ContributeToEYHComponent } from './contribute-to-eyh/contribute-to-eyh.component';
+import { JoinToEYHComponent } from './join-to-eyh/join-to-eyh.component';
+import { YourContributionComponent } from './your-contribution/your-contribution.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -67,7 +72,7 @@ export function socialConfigs() {
     WhoweareComponent, 
     WhatwedoComponent, 
     StoryviewComponent, 
-    UpdateEventsComponent, ReachUsComponent  
+    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent  
   ],  
   imports: [  
     BrowserModule,  
