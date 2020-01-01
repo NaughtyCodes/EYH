@@ -1,1 +1,61 @@
-<p>homes-info works!</p>
+<div class="container">
+    <div class="row" style="margin-bottom: 2%;" >
+        <p-tabMenu [model]="manageHomeItems">
+            <ng-template pTemplate="item" let-item let-i="index">
+                {{item.label}}
+            </ng-template>
+        </p-tabMenu>
+    </div>
+    <div class="row">
+        <table class="list-homes-table">
+            <tr>
+                <th *ngIf="isFormEditable">Edit</th>
+                <th *ngIf="isFormEditable">Del</th>
+                <th>Home</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Note</th>
+                <th>Last-Updated</th>
+            </tr>
+            <tr *ngFor="let home of homes">
+                <td *ngIf="isFormEditable"><button class="btn" (click)="editHome($event,home);"><i class="pi pi-pencil"></i></button></td>
+                <td *ngIf="isFormEditable"><button class="btn" (click)="deleteHome($event,home);"><i class="pi pi-times"></i></button></td>
+                <td>{{home.name}}</td>
+                <td>{{home.address}}</td>
+                <td>{{home.contact}}</td>
+                <td>{{home.note}}</td>
+                <td>{{home.timestamp}}</td>
+            </tr>
+        </table>
+
+        <p-dialog [(visible)]="homeFormDisplay" [style]="{width: '80%', height: '500px'}">
+            <p-header>
+                {{homeFromTitle}}
+            </p-header>
+              <form [formGroup]="homeForm">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <textarea class="form-control" name="name" formControlName="name"  rows="1" id="name"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea class="form-control" name="address" formControlName="address"  rows="2" id="address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact:</label>
+                    <textarea class="form-control" name="contact" formControlName="contact"  rows="1" id="contact"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="note">Note:</label>
+                    <textarea class="form-control" name="note" formControlName="note"  rows="2" id="contact"></textarea>
+                </div>
+    
+                <button style="margin-left:1%" type="submit" (click)="updateHome($event);" class="btn btn-primary">Update</button>
+                <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+
+              </form>
+            <!-- <p-footer></p-footer> --> 
+          </p-dialog>
+
+    </div>
+</div>

@@ -38,9 +38,6 @@ export class UpdateEventsComponent {
   }
 
   ngOnInit() {
-
-      
-
       //this.listStorys();
       
       this.items = [
@@ -55,6 +52,7 @@ export class UpdateEventsComponent {
           label: 'Manage-Story', 
           icon:  'pi pi-pencil',
           command: ($event) => {
+            this.listStorys();
             this.menuhandlerService.active($event);
           }
         },

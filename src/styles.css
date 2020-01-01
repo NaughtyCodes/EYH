@@ -8,6 +8,11 @@
     color:#25282a !important;
 }
 
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+    background-color: #00af66 !important;
+    border: 1px solid #00af66 !important;
+}
+
 .bc-green{
     background: #00af66 !important;
     color: #00af66 !important;

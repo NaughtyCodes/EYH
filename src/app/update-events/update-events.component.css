@@ -14,7 +14,12 @@ table > tr:first-child {
     height:45px;
 }
 
-table > tr > th:first-child {
+table > tr > td {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+table > tr > th {
     padding-left: 2%;
 }
 
