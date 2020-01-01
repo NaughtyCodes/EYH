@@ -12,11 +12,13 @@
     overflow-y:scroll;
 }
 
+
 table > tr:first-child {
     background-color: #00af66 !important;
     color: white !important;
     border:1px solid #25282a;
 }
+
 
 table > tr > td:first-child {
     background-color: #f7f5f5 !important;
