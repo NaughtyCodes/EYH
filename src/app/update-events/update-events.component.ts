@@ -26,6 +26,7 @@ export class UpdateEventsComponent {
   storyFromTitle = "";
   isUpdate = false;
   selectedStory = {};
+  menuHeading = "EYH - Upcoming Events";
 
   constructor(
     private storyhandlerService: StoryhandlerService,
@@ -38,13 +39,15 @@ export class UpdateEventsComponent {
   }
 
   ngOnInit() {
-      //this.listStorys();
+      this.menuhandlerService.clearClass(".tab-menu-view","active-tab");
+      this.menuhandlerService.addClass("[for=Upcoming-Events]","active-tab");
       
       this.items = [
         {
           label: 'Upcoming-Events', 
           icon: 'pi pi-globe',
           command: ($event) => {
+            this.menuHeading = "EYH - Upcoming Events";
             this.menuhandlerService.active($event);
           }
         },
@@ -52,7 +55,8 @@ export class UpdateEventsComponent {
           label: 'Manage-Story', 
           icon:  'pi pi-pencil',
           command: ($event) => {
-            this.listStorys();
+            this.menuHeading = "EYH - Manage Story";
+            this.listStories();
             this.menuhandlerService.active($event);
           }
         },
@@ -60,6 +64,7 @@ export class UpdateEventsComponent {
           label: 'Home-Info', 
           icon: 'pi pi-info-circle',
           command: ($event) => {
+            this.menuHeading = "EYH - Orphanage / Oldage Homes Info";
             this.menuhandlerService.active($event);
           }
         },
@@ -67,6 +72,7 @@ export class UpdateEventsComponent {
           label: 'Your-Contribution', 
           icon: 'pi pi-globe',
           command: ($event) => {
+            this.menuHeading = "EYH - Your Contribution";
             this.menuhandlerService.active($event);
           }
         },
@@ -74,6 +80,7 @@ export class UpdateEventsComponent {
           label: 'Contribute-To-EYH', 
           icon: 'pi pi-globe',
           command: ($event) => {
+            this.menuHeading = "EYH - Contribute To Expand-Your-Hands";
             this.menuhandlerService.active($event);
           }
         },
@@ -81,6 +88,7 @@ export class UpdateEventsComponent {
           label: 'Join-To-EYH', 
           icon: 'pi pi-globe',
           command: ($event) => {
+            this.menuHeading = "EYH - Join To Expand-Your-Hands";
             this.menuhandlerService.active($event);
           }
         }
@@ -88,20 +96,13 @@ export class UpdateEventsComponent {
 
       this.manageStoryItems = [
         {
-          label: 'Story List', 
-          icon: 'fa fa-fw fa-bar-chart', 
-          
-          command: (event) => {
-            this.listStorys();
-          }
-        },
-        {
           label: 'Add New Story', 
           icon: 'fa fa-fw fa-calendar',
           command: (event) => {
             this.storyForm.reset();
             this.storyFromTitle = "Add A New Story";
             this.storyFormDisplay = true;
+            this.isUpdate = false;
           }
         }
     ];
@@ -118,10 +119,10 @@ export class UpdateEventsComponent {
   }
 
   manageStory() {
-    this.listStorys();
+    this.listStories();
   }
 
-  listStorys() {
+  listStories() {
     this.storyhandlerService.getStories().subscribe(data => {
       this.stories = this.storyhandlerService.storyMapper(data);
     }, 

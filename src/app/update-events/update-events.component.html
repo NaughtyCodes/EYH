@@ -6,7 +6,7 @@
         <p-menu [model]="items"></p-menu>
       </div>
       <div class="col-sm-9">
-        <h3 style="margin-left: -16px;">EYH - Stroy Table</h3>
+        <h3 style="margin-left: -16px;">{{menuHeading}}</h3>
           <div for="Manage-Story" class="row tab-menu-row tab-menu-view hide-tab" >
               <p-tabMenu [model]="manageStoryItems">
                   <ng-template pTemplate="item" let-item let-i="index">

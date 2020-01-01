@@ -9,8 +9,21 @@
 }
 
 body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+    background-color: #f4f4f4 !important;
+    border: 1px solid #c8c8c8 !important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover {
     background-color: #00af66 !important;
-    border: 1px solid #00af66 !important;
+    border: 1px solid #00af66 !important; 
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover > a{
+    color: white !important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav {
+    border-bottom: unset !important; 
 }
 
 .bc-green{
@@ -84,4 +97,24 @@ body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
 
   .active-tab {
       display: block;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
   }

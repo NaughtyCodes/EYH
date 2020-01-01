@@ -40,6 +40,7 @@ export class HomesInfoComponent implements OnInit {
           this.homeForm.reset();
           this.homeFromTitle = "Add New Orphanage / Oldage Home Details";
           this.homeFormDisplay = true;
+          this.isUpdate = false;
         }
       },
       {
@@ -111,6 +112,15 @@ export class HomesInfoComponent implements OnInit {
       });
     } 
   }
+
+  deleteHome($event: any, home: Home) {
+    console.log('Deleting the story id => '+home.id);
+    this.homehandlerService.deleteHome(home.id.toString()).then( _ => {
+      alert('Deleted the story id => '+home.id);
+    }, errorCode => {
+      console.log(errorCode);
+    });
+ }
 
   clearForm(){
     this.homeForm.reset();

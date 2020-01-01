@@ -19,7 +19,7 @@
             </tr>
             <tr *ngFor="let home of homes">
                 <td *ngIf="isFormEditable"><button class="btn" (click)="editHome($event,home);"><i class="pi pi-pencil"></i></button></td>
-                <td *ngIf="isFormEditable"><button class="btn" (click)="editHome($event,home);"><i class="pi pi-times"></i></button></td>
+                <td *ngIf="isFormEditable"><button class="btn" (click)="deleteHome($event,home);"><i class="pi pi-times"></i></button></td>
                 <td>{{home.name}}</td>
                 <td>{{home.address}}</td>
                 <td>{{home.contact}}</td>

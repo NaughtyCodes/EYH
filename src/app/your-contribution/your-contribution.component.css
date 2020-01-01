@@ -1,0 +1,42 @@
+.v-txt {
+    transform:rotate(7deg);
+    -ms-transform:rotate(90deg); /* IE 9 */
+    -moz-transform:rotate(90deg); /* Firefox */
+    -webkit-transform:rotate(90deg); /* Safari and Chrome */
+    -o-transform:rotate(90deg); /* Opera */
+    padding:14px;
+}
+
+.contribution-table {
+    margin-top:5%;
+    overflow-y:scroll;
+}
+
+table > tr:first-child {
+    background-color: #00af66 !important;
+    color: white !important;
+    border:1px solid #25282a;
+}
+
+table > tr > td:first-child {
+    background-color: #f7f5f5 !important;
+    color: #25282a !important;
+    padding: 2%;
+}
+
+table > tr > td:last-child {
+    background: #ffc107;
+    font-weight: bold;
+    color: #25282a !important;
+    padding: 2%;
+}
+
+table > tr > td{
+    background-color: #edfff7;
+    color: #25282a;
+    padding: 2%;
+}
+
+table > tr > td {
+    border:1px solid #25282a;
+}
