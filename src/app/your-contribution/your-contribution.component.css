@@ -8,7 +8,7 @@
 }
 
 .contribution-table {
-    margin-top:5%;
+    /* margin-top:5%; */
     overflow-y:scroll;
 }
 
@@ -21,22 +21,19 @@ table > tr:first-child {
 table > tr > td:first-child {
     background-color: #f7f5f5 !important;
     color: #25282a !important;
-    padding: 2%;
+    padding: 1% 2% 1% 2%;
 }
 
 table > tr > td:last-child {
     background: #ffc107;
     font-weight: bold;
     color: #25282a !important;
-    padding: 2%;
+    padding: 1% 2% 1% 2%;
 }
 
 table > tr > td{
     background-color: #edfff7;
     color: #25282a;
-    padding: 2%;
-}
-
-table > tr > td {
+    padding: 1% 2% 1% 2%;
     border:1px solid #25282a;
 }
