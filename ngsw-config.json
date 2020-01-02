@@ -26,4 +26,18 @@
       }
     }
   ]
+  ,"dataGroups": [
+    {
+      "name": "headlines",
+      "urls": [
+        "https://firestore.googleapis.com//google.firestore.v1.Firestore/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "1d",
+        "timeout": "5s",
+        "strategy": "freshness"
+      }
+    }
+  ]
 }

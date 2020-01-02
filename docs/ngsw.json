@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1577984546079,
+  "timestamp": 1577985840369,
   "index": "/EYH/index.html",
   "assetGroups": [
     {
@@ -91,7 +91,19 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "headlines",
+      "patterns": [
+        "https:\\/\\/firestore\\.googleapis\\.com\\/\\/google\\.firestore\\.v1\\.Firestore\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 10,
+      "maxAge": 86400000,
+      "timeoutMs": 5000,
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/EYH/assets/doc/desktop-view.PNG": "31a18f2dd2435a56ac5dfd0e8d1e6e6d4606d318",
     "/EYH/assets/doc/mobile-view.PNG": "0129ebad214a024d355f507be018a767ecfa7abd",
