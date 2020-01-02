@@ -44,6 +44,7 @@ import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.compo
 import { ContributeToEYHComponent } from './contribute-to-eyh/contribute-to-eyh.component';
 import { JoinToEYHComponent } from './join-to-eyh/join-to-eyh.component';
 import { YourContributionComponent } from './your-contribution/your-contribution.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -88,7 +89,8 @@ export function socialConfigs() {
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],  
   providers: [  
     SessionService,
