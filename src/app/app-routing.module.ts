@@ -30,32 +30,32 @@ export const routes: Routes = [
     component: LoginComponent,    
     data: {    
       title: 'Login Page'
-    },
-    canActivate: [LoginGuard]
+    }
+   // canActivate: [LoginGuard]
   },    
   {    
     path: 'dashboard',    
     component: DashboardComponent,    
     data: {    
       title: 'Dashboard Page'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
+   // canActivate: [AuthGuardGuard]    
   },
   {    
     path: 'who-we-are',    
     component: WhoweareComponent,    
     data: {    
       title: 'Who We Are'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
+   // canActivate: [AuthGuardGuard]    
   },
   {    
     path: 'what-we-do',    
     component: DashboardComponent,    
     data: {    
       title: 'What We Do'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
+   // canActivate: [AuthGuardGuard]    
   },
   {    
     path: 'story/:id',    
