@@ -14,7 +14,7 @@ import { ReachUsComponent } from './reach-us/reach-us.component';
 export const routes: Routes = [    
   {    
     path: '',    
-    redirectTo: 'login',    
+    redirectTo: 'who-we-are',    
     pathMatch: 'full' 
   },
   {
