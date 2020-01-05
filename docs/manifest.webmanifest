@@ -4,7 +4,8 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "start_url": "/EYH",
+  "scope":"/EYH/",
+  "start_url": "/who-we-are",
   "description": "Expand Your Hands..!",
   "icons": [
     {
