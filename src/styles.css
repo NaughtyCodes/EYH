@@ -118,3 +118,31 @@ body .ui-tabmenu .ui-tabmenu-nav {
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+  /*Home page Changes*/
+@media screen and (max-width:767px) {
+	.carousel#demo {
+	margin-bottom: 4rem;
+}
+
+/*What we do page*/
+.card-group .card {
+	max-width: 100% !important;
+}
+
+/*Reach us*/
+.jumbotron.contact-txt .container h1 {
+	font-size: 24px;
+	text-decoration: underline;
+}
+
+.jumbotron.contact-txt {
+	background: #fff;
+}
+
+.jumbotron.contact-txt p {
+	margin-bottom: .5rem;
+	line-height: 24px;
+}
+
+}
