@@ -23,6 +23,7 @@ export class JoinToEYHComponent implements OnInit {
   userForm: FormGroup;
   selectedUser = {};
   userFromTitle = "";
+  formButtonName = "";
   manageUserItems: MenuItem[];
 
   constructor(
@@ -43,6 +44,7 @@ export class JoinToEYHComponent implements OnInit {
         command: (event) => {
           this.userForm.reset();
           this.userFromTitle = "Add New EYH Member";
+          this.formButtonName = "Add New User";
           this.userFormDisplay = true;
           this.isUpdate = false;
         }
@@ -50,6 +52,7 @@ export class JoinToEYHComponent implements OnInit {
       {
         label: 'Enable / Disable Edit', 
         command: (event) => {
+          this.formButtonName = "Update User";
           this.isFormEditable = this.isFormEditable === false ? true : false;
         }
       }
