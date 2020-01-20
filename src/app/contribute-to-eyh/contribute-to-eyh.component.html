@@ -1,1 +1,11 @@
-<p>contribute-to-eyh works!</p>
+<div class="container">
+    <div class="row" style="margin-bottom: 2%;" >
+        <p-tabMenu [model]="manageHomeItems">
+            <ng-template pTemplate="item" let-item let-i="index">
+                {{item.label}}
+            </ng-template>
+        </p-tabMenu>
+    </div>
+    <div class="row">
+    </div>
+</div>

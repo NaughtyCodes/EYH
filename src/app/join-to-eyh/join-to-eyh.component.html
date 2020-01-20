@@ -1,1 +1,54 @@
-<p>join-to-eyh works!</p>
+<div class="container">
+    <div class="row" style="margin-bottom: 2%;" >
+        <p-tabMenu [model]="manageUserItems">
+            <ng-template pTemplate="item" let-item let-i="index">
+                {{item.label}}
+            </ng-template>
+        </p-tabMenu>
+    </div>
+    <div class="row">
+        <table class="list-eyhusers-table">
+            <tr>
+                <th *ngIf="isFormEditable">Edit</th>
+                <th *ngIf="isFormEditable">Del</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Last-Updated</th>
+            </tr>
+            <tr *ngFor="let user of eyhUsers">
+                <td *ngIf="isFormEditable"><button class="btn" (click)="editUser($event,user);"><i class="pi pi-pencil"></i></button></td>
+                <td *ngIf="isFormEditable"><button class="btn" (click)="deleteUser($event,user);"><i class="pi pi-times"></i></button></td>
+                <td>{{user.name}}</td>
+                <td>{{user.emailId}}</td>
+                <td>{{user.timestamp}}</td>
+            </tr>
+        </table>
+
+        <p-dialog [(visible)]="userFormDisplay" [style]="{width: '80%', height: '500px'}">
+            <p-header>
+                {{userFromTitle}}
+            </p-header>
+              <form [formGroup]="userForm">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <textarea class="form-control" name="name" formControlName="name"  rows="1" id="name"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="address">Email:</label>
+                    <textarea class="form-control" name="email" formControlName="email"  rows="2" id="email"></textarea>
+                </div>
+<!-- 
+                <div class="form-group">
+                    <label for="contact">LastUpdated:</label>
+                    <textarea class="form-control" name="lastUpdate" formControlName="lastUpdate"  rows="1" id="lastUpdate"></textarea>
+                </div>
+-->
+                <button style="margin-left:1%" type="submit" (click)="updateUser($event);" class="btn btn-primary">formButtonName</button>
+                <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+
+              </form>
+            <!-- <p-footer></p-footer> --> 
+          </p-dialog>
+
+    </div>
+</div>

@@ -86,7 +86,7 @@ body .ui-tabmenu .ui-tabmenu-nav {
     -ms-transform: translate(0%, 0%); /* IE 9 */
     -webkit-transform: translate(0%, 0%); /* Safari prior 9.0 */
     transform: translate(0%, 0%);
-    
+    margin-bottom: 1rem; 
     color: #25282a;
    
   }
@@ -120,9 +120,13 @@ body .ui-tabmenu .ui-tabmenu-nav {
   }
 
   /*Home page Changes*/
-@media screen and (max-width:767px) {
-	.carousel#demo {
-	margin-bottom: 4rem;
+@media screen and (max-width:767px) { 
+    .carousel#demo {
+	/* margin-bottom: 4rem; */
+}
+
+.row .eyh-home-text {
+    margin-bottom: 1rem; 
 }
 
 /*What we do page*/

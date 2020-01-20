@@ -1,0 +1,35 @@
+.list-eyhusers-table {
+    width:100%;
+}
+
+.modify-control {
+    display: none;
+}
+
+table > tr:first-child {
+    background-color: #00af66 !important;
+    color: white !important;
+    height:45px;
+}
+
+table > tr > td {
+    padding-left: 1% !important;
+    padding-right: 1% !important;
+}
+
+table > tr > th {
+    padding-left: 2%;
+}
+
+table > tr:not(:first-child) {
+ color: #25282a;   
+}
+
+table > tr:nth-child(even) {
+    background: #f7f5f5;
+}
+
+table > tr:nth-child(odd) {
+    background: #FFF;
+}
+
