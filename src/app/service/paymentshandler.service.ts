@@ -8,6 +8,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Payment } from '../models/payment';
 import { EyhUser } from '../models/eyh-user';
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
+import { switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 
 
 @Injectable({
@@ -15,11 +17,16 @@ import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 })
 export class PaymentshandlerService {
  
+  getUserPayedDetails$: BehaviorSubject<string|null>;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private firestore: AngularFirestore 
-  ) { }
+  ) { 
+    this.getUserPayedDetails$ = new BehaviorSubject(null);
+    this.queryUserPayedDetails();
+  }
 
   paymentMapper(data: any): Payment[] {
     return data.map(e => {
@@ -31,7 +38,8 @@ export class PaymentshandlerService {
         month: e.payload.doc.data()['month'],
         timestamp: e.payload.doc.data()['timestamp'],
         userId: userId,
-        year: e.payload.doc.data()['year']
+        year: e.payload.doc.data()['year'],
+        updatedBy: e.payload.doc.data()['updatedBy']
       } as Payment;
     });
   }
@@ -67,6 +75,23 @@ export class PaymentshandlerService {
       });
     });
     //return {"name":"mohan"};
+  }
+
+  getUserPayedDetails(emailId: string){
+   this.getUserPayedDetails$.next(emailId); 
+  }
+
+  queryUserPayedDetails(): any{
+    const queryObservable = this.getUserPayedDetails$.pipe(switchMap(userEmailID => 
+        this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', userEmailID)).valueChanges()
+      )
+    );
+
+    queryObservable.subscribe(data => {
+      console.log(JSON.stringify(data));
+    });
+
+    return queryObservable;
   }
 
   addPayment(payment: Payment) {

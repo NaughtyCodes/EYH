@@ -6,4 +6,6 @@ export interface Payment {
     timestamp: String;
     userId: String;
     year: String;
+    updatedBy: String;
+    note: String
 }

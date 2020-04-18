@@ -29,6 +29,11 @@ export class MenuhandlerService {
       this.addClass("[for="+$event.item.label+"]","active-tab");
     }
 
+    activeDiv($event: any) {
+      this.clearClass(".div-toggel-view","active-tab");
+      this.addClass("[for="+$event.item.label+"]","active-tab");
+    }
+
     clearClass(queryClassName :any, removeClassName :any) {
       window.document.querySelectorAll(queryClassName).forEach((e,i)=>{
         e.classList.remove(removeClassName);
