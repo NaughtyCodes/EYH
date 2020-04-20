@@ -77,18 +77,34 @@ export class PaymentshandlerService {
     //return {"name":"mohan"};
   }
 
-  getUserPayedDetails(emailId: string){
-   this.getUserPayedDetails$.next(emailId); 
+  getUserPayedDetails(param: any){
+    if(param !== null){
+      return this.firestore.collection('eyh-payments', 
+        ref => ref
+          .where('emailId', '==', param['emailId'])
+          .where('month', '==', param['month']))
+          .valueChanges()
+      } 
+      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges();
+   //this.getUserPayedDetails$.next(param); 
   }
 
   queryUserPayedDetails(): any{
-    const queryObservable = this.getUserPayedDetails$.pipe(switchMap(userEmailID => 
-        this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', userEmailID)).valueChanges()
-      )
-    );
+    const queryObservable = this.getUserPayedDetails$.pipe(
+      switchMap((param: any) => {
+       if(param !== null){
+        return this.firestore.collection('eyh-payments', 
+          ref => ref
+            .where('emailId', '==', param['emailId'])
+            .where('month', '==', param['month']))
+            .valueChanges()
+        } 
+        return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges()
+      })
+  );
 
     queryObservable.subscribe(data => {
-      console.log(JSON.stringify(data));
+      //console.log(JSON.stringify(data));
     });
 
     return queryObservable;

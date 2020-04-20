@@ -45,10 +45,10 @@ export class ContributeToEYHComponent implements OnInit {
     });
   }
 
-  createPayment(user: EyhUser): FormGroup {
+  createPayment(user: EyhUser, totalAmount : number): FormGroup {
     let formGroup: FormGroup = new FormGroup(
       {
-        "amount": new FormControl("100"),
+        "amount": new FormControl(totalAmount),
         "emailId": new FormControl(user['name']),
         "timestamp": new FormControl(formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530')),
         "userId": new FormControl("/eyh-users/"+ user.id),
@@ -61,14 +61,30 @@ export class ContributeToEYHComponent implements OnInit {
   }
 
   initPaymentArray(users: EyhUser[]) {
+    
     const formArray = this.contributionForm.controls.payments as FormArray;
-    users.map(item => {
-      let d: FormGroup;
-      console.log(item.emailId);
-      d = this.createPayment(item)
-      formArray.push(d);
+    users.map(u => {
+      let fg: FormGroup;
+      let totAmount = 0;
+      console.log(u.emailId);
+      this.paymentshandlerService.getUserPayedDetails({
+        'emailId': u.emailId,
+        'month':formatDate(new Date(), 'MMMM', 'en-US', '+0530')
+      }).subscribe(d => {
+         totAmount = d.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
+         console.log(totAmount);
+         fg = this.createPayment(u, totAmount);
+         formArray.push(fg);
+         this.contributionForm.setControl('payment', formArray);
+
+         this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
+         this.payments = this.contributionForm.value.payments;
+      });
+ 
     });
-    this.contributionForm.setControl('payment', formArray);
+
+  
+
   }
 
   intPayment(): FormGroup {
@@ -88,22 +104,23 @@ export class ContributeToEYHComponent implements OnInit {
     this.manageHomeItems = [
       {
         label: 'Add-Contribution', 
-        command: (event) => {   
-          this.paymentshandlerService.getUserPayedDetails('hellomohanakrishnan@gmail.com');
-        /*         
-            this.initContributionForm();
-            this.eyhUserhandlerService.getUsers().subscribe(users =>{
+        command: (event) => {
+          this.initContributionForm();
+          this.eyhUserhandlerService.getUsers().subscribe(users =>{
             //this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
             this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
             this.initPaymentArray(this.eyhUsers);
-            this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
-            console.log(JSON.stringify(this.eyhUsers));
-            this.menuhandlerService.activeDiv(event);
-            this.payments = this.contributionForm.value.payments;
-            console.log(JSON.stringify(this.payments));
-        
+            // this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
+            // console.log(JSON.stringify(this.eyhUsers));
+            setTimeout(() => {
+              this.menuhandlerService.activeDiv(event);
+            },1000);
+            
+            // console.log(JSON.stringify(this.payments));
           });
-        */  
+
+
+                 
           // let userId: String;
           // let payment: Payment;
 
