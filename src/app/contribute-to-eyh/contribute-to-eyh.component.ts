@@ -23,7 +23,8 @@ export class ContributeToEYHComponent implements OnInit {
   eyhUsers: any;
   curMonth = '';
   contributionForm: FormGroup;
-  payments: [];
+  funds: FormArray;
+
 
   constructor(
     private paymentshandlerService: PaymentshandlerService,
@@ -31,6 +32,7 @@ export class ContributeToEYHComponent implements OnInit {
     private menuhandlerService: MenuhandlerService,
     private formBuilder: FormBuilder
   ) { 
+    this.initContributionForm();
     this.socialusers =  JSON.parse(localStorage.getItem('socialusers'));
   }
 
@@ -39,9 +41,9 @@ export class ContributeToEYHComponent implements OnInit {
   }
 
   initContributionForm() {
-    this.contributionForm = this.formBuilder.group({
-      payments: this.formBuilder.array([])
-      //payments: this.formBuilder.array([this.intPayment()])
+    this.contributionForm = new FormGroup({
+      //payments: new FormArray([ this.intPayment() ])
+      payments: new FormArray([])
     });
   }
 
@@ -78,7 +80,8 @@ export class ContributeToEYHComponent implements OnInit {
          this.contributionForm.setControl('payment', formArray);
 
          this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
-         this.payments = this.contributionForm.value.payments;
+         //this.payments = this.contributionForm.value.payments;
+         this.funds = this.contributionForm.get('payments') as FormArray;
       });
  
     });
@@ -107,43 +110,15 @@ export class ContributeToEYHComponent implements OnInit {
         command: (event) => {
           this.initContributionForm();
           this.eyhUserhandlerService.getUsers().subscribe(users =>{
-            //this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
             this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
             this.initPaymentArray(this.eyhUsers);
-            // this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
-            // console.log(JSON.stringify(this.eyhUsers));
             setTimeout(() => {
               this.menuhandlerService.activeDiv(event);
-            },1000);
+            },500);
             
-            // console.log(JSON.stringify(this.payments));
+            console.log(JSON.stringify(this.funds));
           });
 
-
-                 
-          // let userId: String;
-          // let payment: Payment;
-
-          // this.paymentshandlerService.getUsers().subscribe(users => 
-          //   this.paymentshandlerService.eyhUserMapper(users).filter(u => {
-          //     this.socialusers = JSON.parse(localStorage.getItem('socialusers'));
-
-          //     if(u['emailId'] === this.socialusers.email){
-          //       console.log(JSON.stringify(u));
-          //       userId = u['id'];
-
-          //       payment = {
-          //         "amount": "100",
-          //         "emailId": this.socialusers.email,
-          //         "timestamp": formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530'),
-          //         "userId": "/eyh-users/"+ userId,
-          //         "month": formatDate(new Date(), 'MMMM', 'en-US', '+0530'),
-          //         "year": formatDate(new Date(), 'yyyy', 'en-US', '+0530'),
-          //         "updatedBy": this.socialusers.email
-          //       };
-          //       this.paymentshandlerService.addPayment(payment);
-          //     }
-          // }));
         }
       },
       {
@@ -171,8 +146,6 @@ export class ContributeToEYHComponent implements OnInit {
   ];
 
   }
-
-  
 
   boo(): void{
     console.log("Just an another on click..!!");

@@ -8,9 +8,8 @@
     </div>
     <div class="row">
         <div for="Add-Contribution" class="row div-toggel-view hide-tab" >
-            
-          <!-- <<form [formGroup]="contributionForm" (submit)="submit()"> 
-           <div formArrayName="payments">  -->
+          <form [formGroup]="contributionForm" (ngSubmit)="onSubmit()">
+            <div formArrayName="payments">
             <table class="list-user-table">
               <tr>
                 <th>Update</th>
@@ -21,24 +20,25 @@
                 <th>Note</th>
                 <th>Updated By</th>
               </tr>
-              <!-- <tr [formGroupName]="i" *ngFor="let p of payments; let i = index"> -->
-                <tr *ngFor="let p of payments; let i = index">
+              <tr [formGroupName]="i" *ngFor="let f of contributionForm.get('payments').controls; let i = index;">
+              
+                <!-- <tr *ngFor="let p of payments; let i = index"> -->
                 <td><button class="btn" (click)="boo();"><i class="pi pi-pencil"></i></button></td>
                 <td><button class="btn" (click)="boo();"><i class="pi pi-times"></i></button></td>
-                <td >{{p.emailId}}</td>
-                <td >{{p.month}}</td>
-                <td >{{p.amount}}</td> 
-                <td >{{p.updatedBy}}</td>
-                <td>thanks</td>
-              
+                <td><span>{{f.value.emailId}}</span></td>
+                <td><span>{{f.value.month}}</span></td>
+                <!-- <td><input formControlName="month" placeholder="{{month}}"></td> -->
+                <td><input formControlName="amount" placeholder="{{amount}}"></td>
+                <td><input formControlName="note" placeholder="{{note}}"></td>
+                <td><span>{{f.value.updatedBy}}</span></td>
               </tr>
               <br />
               <tr>
                 <td><button class="btn" >Submit</button></td>
               </tr>
             </table>
-           <!-- </div>
-          </form> -->
+            </div>
+          </form>
            
     </div>
 </div>
