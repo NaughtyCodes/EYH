@@ -7,5 +7,6 @@ export interface Payment {
     userId: String;
     year: String;
     updatedBy: String;
-    note: String
+    note: String;
+    name?: String;
 }

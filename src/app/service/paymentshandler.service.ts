@@ -39,7 +39,8 @@ export class PaymentshandlerService {
         timestamp: e.payload.doc.data()['timestamp'],
         userId: userId,
         year: e.payload.doc.data()['year'],
-        updatedBy: e.payload.doc.data()['updatedBy']
+        updatedBy: e.payload.doc.data()['updatedBy'],
+        name: e.payload.doc.data['name']
       } as Payment;
     });
   }
@@ -116,6 +117,10 @@ export class PaymentshandlerService {
 
   updatePayment(payment: Payment) {
     return "";
+  }
+
+  deletePayments(paymentId: string){
+    return this.firestore.doc('eyh-payments/' + paymentId).delete();
   }
 
 

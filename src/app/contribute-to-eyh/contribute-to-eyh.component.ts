@@ -24,6 +24,9 @@ export class ContributeToEYHComponent implements OnInit {
   curMonth = '';
   contributionForm: FormGroup;
   funds: FormArray;
+  listPayments: any;
+  amount: any;
+  note: any;
 
 
   constructor(
@@ -43,7 +46,7 @@ export class ContributeToEYHComponent implements OnInit {
   initContributionForm() {
     this.contributionForm = new FormGroup({
       //payments: new FormArray([ this.intPayment() ])
-      payments: new FormArray([])
+      payments: new FormArray([ ])
     });
   }
 
@@ -51,12 +54,14 @@ export class ContributeToEYHComponent implements OnInit {
     let formGroup: FormGroup = new FormGroup(
       {
         "amount": new FormControl(totalAmount),
-        "emailId": new FormControl(user['name']),
+        "emailId": new FormControl(user['emailId']),
+        "month": new FormControl(formatDate(new Date(), 'MMMM', 'en-US', '+0530')),
         "timestamp": new FormControl(formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530')),
         "userId": new FormControl("/eyh-users/"+ user.id),
-        "month": new FormControl(formatDate(new Date(), 'MMMM', 'en-US', '+0530')),
         "year": new FormControl(formatDate(new Date(), 'yyyy', 'en-US', '+0530')),
-        "updatedBy": new FormControl(this.socialusers.email)
+        "updatedBy": new FormControl(this.socialusers.email),
+        "note": new FormControl(''),
+        "name": new FormControl(user['name']),
       }
     );
     return formGroup;
@@ -68,6 +73,7 @@ export class ContributeToEYHComponent implements OnInit {
     users.map(u => {
       let fg: FormGroup;
       let totAmount = 0;
+      let note = '';
       console.log(u.emailId);
       this.paymentshandlerService.getUserPayedDetails({
         'emailId': u.emailId,
@@ -133,10 +139,12 @@ export class ContributeToEYHComponent implements OnInit {
         }
       },
       {
-        label: 'List Payments', 
+        label: 'List-Payments', 
         command: (event) => {
           this.paymentshandlerService.getPayments().subscribe(data => {
             console.log(JSON.stringify(this.paymentshandlerService.paymentMapper(data)));
+            this.menuhandlerService.activeDiv(event);
+            this.listPayments = this.paymentshandlerService.paymentMapper(data);
           }, 
           errorCode => {
             console.log(errorCode);
@@ -149,6 +157,23 @@ export class ContributeToEYHComponent implements OnInit {
 
   boo(): void{
     console.log("Just an another on click..!!");
+  }
+
+  onSubmit(): void {
+    let p = this.contributionForm.value.payments;
+    this.contributionForm.reset();
+    p.forEach(r => {
+      this.paymentshandlerService.addPayment(r).then( _ => {
+        console.log("Record Updated..!");
+        this.initContributionForm();
+        this.eyhUserhandlerService.getUsers().subscribe(users =>{
+          this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
+          this.initPaymentArray(this.eyhUsers);
+        });
+      },errorCode => {
+        console.log(errorCode);
+      });
+    });
   }
 
 }
