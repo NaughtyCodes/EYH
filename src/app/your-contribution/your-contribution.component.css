@@ -10,8 +10,17 @@
 .contribution-table {
     /* margin-top:5%; */
     overflow-y:scroll;
+    font-size:x-small;
 }
 
+.year-heading {
+    background-color: #fbfbfb33 !important;
+    color: #212529 !important;
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
 
 table > tr:first-child {
     background-color: #00af66 !important;

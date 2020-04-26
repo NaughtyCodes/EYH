@@ -37,10 +37,11 @@ export class PaymentshandlerService {
         emailId: e.payload.doc.data()['emailId'],  
         month: e.payload.doc.data()['month'],
         timestamp: e.payload.doc.data()['timestamp'],
-        userId: userId,
+        userId: e.payload.doc.data()['userId'],
         year: e.payload.doc.data()['year'],
         updatedBy: e.payload.doc.data()['updatedBy'],
-        name: e.payload.doc.data['name']
+        name: e.payload.doc.data()['name'],
+        note: e.payload.doc.data()['note']
       } as Payment;
     });
   }
@@ -50,7 +51,8 @@ export class PaymentshandlerService {
       return {
         id: e.payload.doc.id,
         emailId: e.payload.doc.data()['emailId'],  
-        name: e.payload.doc.data()['name'],  
+        name: e.payload.doc.data()['name'],
+        timestamp: e.payload.doc.data()['timestamp']  
       } as EyhUser;
     });
   }
@@ -90,6 +92,14 @@ export class PaymentshandlerService {
    //this.getUserPayedDetails$.next(param); 
   }
 
+  getPaymentsByUser(id: string, year: string){
+    return this.firestore.collection('eyh-payments', 
+        ref => ref
+          .where('userId', '==', '/eyh-users/'+id)
+          .where('year', '==', year))
+          .valueChanges();     
+  }
+
   queryUserPayedDetails(): any{
     const queryObservable = this.getUserPayedDetails$.pipe(
       switchMap((param: any) => {
@@ -115,8 +125,8 @@ export class PaymentshandlerService {
     return this.firestore.collection('eyh-payments').add(payment);
   }
 
-  updatePayment(payment: Payment) {
-    return "";
+  updatePayment(id: string, payment: Payment) {
+    return this.firestore.collection('eyh-payments/').doc(id).update(payment);
   }
 
   deletePayments(paymentId: string){

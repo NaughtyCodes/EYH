@@ -27,6 +27,10 @@ export class ContributeToEYHComponent implements OnInit {
   listPayments: any;
   amount: any;
   note: any;
+  paymentFormDisplay: boolean = false;
+  paymentForm: FormGroup;
+  selectedPayment: Payment;
+  paymentFromTitle:string = 'Payment Form';
 
 
   constructor(
@@ -35,6 +39,7 @@ export class ContributeToEYHComponent implements OnInit {
     private menuhandlerService: MenuhandlerService,
     private formBuilder: FormBuilder
   ) { 
+    this.createEditPaymentForm();
     this.initContributionForm();
     this.socialusers =  JSON.parse(localStorage.getItem('socialusers'));
   }
@@ -115,12 +120,13 @@ export class ContributeToEYHComponent implements OnInit {
         label: 'Add-Contribution', 
         command: (event) => {
           this.initContributionForm();
+          this.menuhandlerService.activeDiv(event);
           this.eyhUserhandlerService.getUsers().subscribe(users =>{
             this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
             this.initPaymentArray(this.eyhUsers);
-            setTimeout(() => {
-              this.menuhandlerService.activeDiv(event);
-            },500);
+            // setTimeout(() => {
+            //   this.menuhandlerService.activeDiv(event);
+            // },600);
             
             console.log(JSON.stringify(this.funds));
           });
@@ -128,10 +134,12 @@ export class ContributeToEYHComponent implements OnInit {
         }
       },
       {
-        label: 'List Users', 
+        label: 'List-Users', 
         command: (event) => {
           this.paymentshandlerService.getUsers().subscribe(data => {
             console.log(JSON.stringify(this.paymentshandlerService.eyhUserMapper(data)));
+            this.eyhUsers = this.paymentshandlerService.eyhUserMapper(data);
+            this.menuhandlerService.activeDiv(event);
           }, 
           errorCode => {
             console.log(errorCode);
@@ -154,6 +162,46 @@ export class ContributeToEYHComponent implements OnInit {
   ];
 
   }
+  
+  createEditPaymentForm() {
+    this.paymentForm = this.formBuilder.group({
+      amount: [''],
+      emailId: [''],
+      month: [''],
+      name: [''],
+      note: [''],
+      timestamp: [''],
+      userId: [''],
+      year: [''],
+      updatedBy: ['']
+    });
+  }
+
+  editPaymentForm($event :any,payment : Payment) {
+    this.paymentFormDisplay = true;
+    this.selectedPayment = payment;
+    this.paymentForm.controls['name'].setValue(payment.name);
+    this.paymentForm.controls['month'].setValue(payment.month);
+    this.paymentForm.controls['amount'].setValue(payment.amount);
+    this.paymentForm.controls['note'].setValue(payment.note);
+  }
+
+  updatePayment($event: any){
+    let up: any;
+    up = {
+      'name': this.paymentForm.value['name'],
+      'month': this.paymentForm.value['month'],
+      'amount': this.paymentForm.value['amount'],
+      'note': this.paymentForm.value['note']
+    };
+    this.paymentshandlerService.updatePayment(this.selectedPayment['id'].toString(),up).then( _ => {
+      console.log("Record Updated..!");
+      this.paymentForm.reset();
+      this.paymentFormDisplay=false;
+    },errorCode => {
+      console.log(errorCode);
+    });
+  }
 
   boo(): void{
     console.log("Just an another on click..!!");
@@ -175,5 +223,18 @@ export class ContributeToEYHComponent implements OnInit {
       });
     });
   }
+
+  clearForm(){
+    this.paymentForm.reset();
+  }
+  
+  deletePayments($event: any, payment: Payment) {
+    console.log('Deleting the payment id => '+payment.id);
+    this.paymentshandlerService.deletePayments(payment.id.toString()).then( _ => {
+      alert('Deleted the payment id => '+payment.id);
+    }, errorCode => {
+      console.log(errorCode);
+    });
+ }
 
 }
