@@ -62,15 +62,16 @@ export const routes: Routes = [
     component: StoryviewComponent,    
     data: {    
       title: 'View Story'    
-    }
-    // canActivate: [AuthGuardGuard]    
+    },
+    canActivate: [AuthGuardGuard]    
   },
   {    
     path: 'reach-us',    
     component: ReachUsComponent,    
     data: {    
       title: 'Reach Us'    
-    }
+    },
+    canActivate: [AuthGuardGuard] 
   },
   {    
     path: 'update-events',    

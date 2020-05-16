@@ -20,8 +20,6 @@ export class LoginGuard implements CanActivate {
     // else if(window.location.pathname === '/login' && this._socialLoginService.getAuthStatus()){
     //   return true;
     // } 
-
-
     this._router.navigate(['/dashboard']);
     return false;
   }
