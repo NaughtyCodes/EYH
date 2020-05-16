@@ -58,7 +58,8 @@ export class ContributeToEYHComponent implements OnInit {
   createPayment(user: EyhUser, totalAmount : number): FormGroup {
     let formGroup: FormGroup = new FormGroup(
       {
-        "amount": new FormControl(totalAmount),
+        "Totalamount": new FormControl(totalAmount),
+        "amount": new FormControl(0),
         "emailId": new FormControl(user['emailId']),
         "month": new FormControl(formatDate(new Date(), 'MMMM', 'en-US', '+0530')),
         "timestamp": new FormControl(formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530')),
@@ -209,15 +210,23 @@ export class ContributeToEYHComponent implements OnInit {
 
   onSubmit(): void {
     let p = this.contributionForm.value.payments;
+    console.log("form val--------->",p.length)
     this.contributionForm.reset();
-    p.forEach(r => {
+    p.forEach((r,index) => {
       this.paymentshandlerService.addPayment(r).then( _ => {
-        console.log("Record Updated..!");
-        this.initContributionForm();
-        this.eyhUserhandlerService.getUsers().subscribe(users =>{
+        console.log("Record Updated..!",index);
+        if(p.length==index+1)
+        {
+          this.initContributionForm();
+          this.eyhUserhandlerService.getUsers().subscribe(users =>{
           this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
           this.initPaymentArray(this.eyhUsers);
-        });
+          });
+        }
+        // this.eyhUserhandlerService.getUsers().subscribe(users =>{
+        //   this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(users);
+        //   this.initPaymentArray(this.eyhUsers);
+        // });
       },errorCode => {
         console.log(errorCode);
       });
