@@ -25,7 +25,8 @@ export class AuthGuardGuard implements CanActivate {
       let user = JSON.parse(localStorage.getItem('socialusers'));
       if(user.grants.includes('all')){
         return true;
-      } else if(user.grants.includes(window.location.pathname.split('/')[1]) || window.location.pathname.split('/')[1] === ""){
+    //} else if(user.grants.includes(window.location.pathname.split('/')[1]) || window.location.pathname.split('/')[1] === ""){
+    } else if(user.grants.includes(window.location.pathname.split('/')[2]) || window.location.pathname.split('/')[2] === ""){
         return true;
       } else {
         return false;

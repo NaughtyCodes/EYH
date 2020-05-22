@@ -10,6 +10,7 @@ import { Identifiers } from '@angular/compiler';
 import { EyhUserhandlerService } from '../service/eyh-userhandler.service';
 import { MenuhandlerService } from '../service/menuhandler.service';
 import { EyhUser } from '../models/eyh-user';
+import { GridOptions } from "ag-grid-community";
 
 @Component({
   selector: 'app-contribute-to-eyh',
@@ -31,18 +32,34 @@ export class ContributeToEYHComponent implements OnInit {
   paymentForm: FormGroup;
   selectedPayment: Payment;
   paymentFromTitle:string = 'Payment Form';
+  addContributionRowdata = [];
+
+  userListcolumnDefs = [
+    {field: 'name' },
+    {field: 'emailId' },
+    {field: 'timestamp'}
+  ];
+
+  addContributionColumnDefs = [
+    {field: 'name' },
+    {field: 'month'},
+    {field: 'amount'},
+    {field: 'updatedBy'},
+    {field: 'note'}
+  ]
 
 
   constructor(
     private paymentshandlerService: PaymentshandlerService,
     private eyhUserhandlerService: EyhUserhandlerService,
     private menuhandlerService: MenuhandlerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) { 
     this.createEditPaymentForm();
     this.initContributionForm();
     this.socialusers =  JSON.parse(localStorage.getItem('socialusers'));
   }
+
 
   get contactFormGroup() {
     return this.contributionForm.get('payments') as FormArray;
@@ -93,6 +110,8 @@ export class ContributeToEYHComponent implements OnInit {
          this.curMonth = formatDate(new Date(), 'MMM', 'en-US', '+0530').toString();     
          //this.payments = this.contributionForm.value.payments;
          this.funds = this.contributionForm.get('payments') as FormArray;
+         console.log(JSON.stringify(this.funds.value));
+         this.addContributionRowdata = this.funds.value;
       });
  
     });
@@ -127,8 +146,6 @@ export class ContributeToEYHComponent implements OnInit {
             // setTimeout(() => {
             //   this.menuhandlerService.activeDiv(event);
             // },600);
-            
-            console.log(JSON.stringify(this.funds));
           });
 
         }
