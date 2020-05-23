@@ -4,6 +4,8 @@ import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
 import { Socialusers } from '../models/socialusers';
 import { SocialloginService } from '../service/sociallogin.service';  
 import { Router, ActivatedRoute, Params } from '@angular/router';  
+import { EyhUserhandlerService } from '../service/eyh-userhandler.service';
+
 @Component({  
   selector: 'app-login',  
   templateUrl: './login.component.html',  
@@ -17,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(  
     public OAuth: AuthService,  
     private SocialloginService: SocialloginService,  
+    private eyhUserhandlerService: EyhUserhandlerService,
     private router: Router  
   ) { 
 
@@ -39,11 +42,19 @@ export class LoginComponent implements OnInit {
     });  
   }
   
-  SavesLocalresponse(socialusers: Socialusers) {  
-      localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
-      console.log(localStorage.getItem('socialusers'));
-      this.SocialloginService.updateAuthStatus(true);  
-      this.router.navigate(['/who-we-are']);   
+  SavesLocalresponse(socialusers: Socialusers) {
+    this.eyhUserhandlerService.getRole(this.socialusers).subscribe(d=>{
+      this.socialusers.role = d[0]['role'];
+      this.eyhUserhandlerService.getGrants(d[0]['role']).subscribe(d => {
+        this.socialusers.grants = d[0]['grant'];
+        console.log(JSON.stringify(this.socialusers.grants));
+
+        localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
+        console.log(localStorage.getItem('socialusers'));
+        this.SocialloginService.updateAuthStatus(true);  
+        this.router.navigate(['/who-we-are']);   
+      });
+    });  
   }
 
   Savesresponse(socialusers: Socialusers) {  
@@ -51,10 +62,18 @@ export class LoginComponent implements OnInit {
       debugger;  
       console.log(res);  
       this.socialusers=res;  
-      this.response = res.userDetail;  
-      localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
-      console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
-      this.router.navigate(['/dashboard']);  
-    })  
+      this.response = res.userDetail; 
+      this.eyhUserhandlerService.getRole(this.socialusers).subscribe(d=>{
+        this.socialusers.role = d[0]['role'];
+
+        this.eyhUserhandlerService.getGrants(d[0]['role']).subscribe(d => {
+          this.socialusers.grants = d[0]['grants'];
+
+          localStorage.setItem('socialusers', JSON.stringify( this.socialusers));
+          console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
+          this.router.navigate(['/dashboard']);  
+        });
+      });
+    });  
   }  
 }

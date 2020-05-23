@@ -46,6 +46,8 @@ import { JoinToEYHComponent } from './join-to-eyh/join-to-eyh.component';
 import { YourContributionComponent } from './your-contribution/your-contribution.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { AgGridModule } from 'ag-grid-angular';
+
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
     [  
@@ -90,6 +92,7 @@ export function socialConfigs() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    AgGridModule.withComponents([]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],  
   providers: [  

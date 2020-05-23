@@ -3,6 +3,8 @@ import { EyhUser } from '../models/eyh-user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { SocialUser } from 'angular-6-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +58,33 @@ export class EyhUserhandlerService {
 
   deleteUser(id: string){
     return this.firestore.doc('eyh-users/' + id).delete();
+  }
+
+
+
+  getGrants(role: string){
+    return this.firestore.collection('eyh-roles', 
+      ref => ref
+        .where('role', '==', role))
+        .valueChanges();
+  }
+
+  getRole(user: SocialUser){   
+    return this.firestore.collection('eyh-users', 
+      ref => ref
+        .where('emailId', '==', user['email'] ))
+        .valueChanges();       
+  }
+
+  getRoles(){
+    return this.firestore.collection('eyh-roles', ref => ref).valueChanges();      
+  }
+
+  checkRoute(): Observable<any[]> {
+    let user = JSON.parse(localStorage.getItem('socialusers'));
+    let role = this.getRole(user);
+    let roles = this.firestore.collection('eyh-roles', ref => ref).valueChanges();
+    return forkJoin([role, roles]);
   }
 
 }

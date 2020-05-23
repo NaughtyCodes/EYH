@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row" style="margin-bottom: 2%;" >
+<div class="container" style="">
+    <div class="row" style="margin-bottom: 2%; margin-left:-15px;" >
         <p-tabMenu [model]="manageHomeItems">
             <ng-template pTemplate="item" let-item let-i="index">
                 {{item.label}}
@@ -8,6 +8,16 @@
     </div>
 <div class="row">
         <div for="Add-Contribution" class="row div-toggel-view hide-tab" >
+        
+         
+            <ag-grid-angular 
+            style="height:400px; width:100%; min-width:65em;"
+              class="ag-theme-alpine" 
+              [rowData]="addContributionRowdata"
+              [columnDefs]="addContributionColumnDefs">
+            </ag-grid-angular>
+          
+<!--
           <form [formGroup]="contributionForm" (ngSubmit)="onSubmit()">
             <div formArrayName="payments">
             <table class="list-user-table">
@@ -21,11 +31,9 @@
               </tr>
               <tr [formGroupName]="i" *ngFor="let f of contributionForm.get('payments')['controls']; let i = index;">
               
-                <!-- <tr *ngFor="let p of payments; let i = index"> -->
                 <td><button class="btn" (click)="boo();"><i class="pi pi-times"></i></button></td>
                 <td><span>{{f.value.emailId}}</span></td>
                 <td><span>{{f.value.month}}</span></td>
-                <!-- <td><input formControlName="month" placeholder="{{month}}"></td> -->
                 <td><input formControlName="amount" placeholder="{{amount}}"></td>
                 <td><input formControlName="note" placeholder="{{note}}"></td>
                 <td><span>{{f.value.updatedBy}}</span></td>
@@ -37,12 +45,12 @@
             </table>
             </div>
           </form>
-           
+-->           
     </div>
 </div>
 
 <div class="row">
-  <div for="List-Payments" class="row div-toggel-view hide-tab" >
+  <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px;" >
       <table class="list-payment-table">
         <tr>
           <th>Update</th>
@@ -75,7 +83,17 @@
 </div>
 
 <div class="row">
+
   <div for="List-Users" class="row div-toggel-view hide-tab" >
+
+  <ag-grid-angular 
+  style="height:400px; width:100%; min-width:65em;"
+    class="ag-theme-alpine" 
+    [rowData]="eyhUsers"
+    [columnDefs]="userListcolumnDefs">
+  </ag-grid-angular>
+
+<!--      
   <table class="list-eyhusers-table">
       <tr>
           <th>Name</th>
@@ -88,6 +106,7 @@
           <td>{{user.timestamp}}</td>
       </tr>
   </table>
+-->
 </div>
 </div>
 

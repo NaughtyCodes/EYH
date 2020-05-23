@@ -7,4 +7,6 @@ export class Socialusers {
     image: string;  
     token?: string;  
     idToken?: string;  
+    role?: string;
+    grants?: [];
 }

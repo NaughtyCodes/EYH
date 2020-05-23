@@ -22,7 +22,7 @@
         <a class="nav-link bc-white" href="reach-us">Reach-Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bc-white" href="update-events">Update-Events</a>
+        <a class="nav-link bc-white" *ngIf="socialusers.role === 'eyh-admin'" href="update-events">Update-Events</a>
       </li>
     </ul>
     <form [formGroup]="" class="form-inline my-2 my-lg-0 login-form">

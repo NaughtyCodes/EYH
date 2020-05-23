@@ -1,4 +1,21 @@
+/* Add application styles & imports to this file! */
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+
 /* You can add global styles to this file, and also import other style files */
+
+.container{
+
+        border-right-color: black;
+        border-right-width: thin;
+        border-right-style: dotted;
+        border-left-color: black;
+        border-left-width: thin;
+        border-left-style: dotted;
+        border-top: unset;
+        border-bottom: unset;
+}
 
 .bc-white{
     color: white !important;
@@ -101,7 +118,7 @@ body .ui-tabmenu .ui-tabmenu-nav {
 
   /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
   
   /* Track */
