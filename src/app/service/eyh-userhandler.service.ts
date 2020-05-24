@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
 import { SocialUser } from 'angular-6-social-login';
+import { tap } from 'rxjs/internal/operators/tap';
+import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +31,15 @@ export class EyhUserhandlerService {
   }
 
   getUsers() {
-    return this.firestore.collection('eyh-users').snapshotChanges();
+    return this.firestore.collection('eyh-users').snapshotChanges().pipe(
+      tap(arr => console.log(`read ${arr.length} docs.`)),
+      shareReplay(1)
+    );     ;
   }
 
   getUser(emailId: any) {
     let eyhUser: EyhUser;
     this.getUsers().subscribe(data => {
-      //console.log(JSON.stringify(this.eyhUserMapper(data)));
       data.filter(e => e['emailId'] === emailId).map(e => {
         return eyhUser = {
           "id": e['id'],
@@ -66,24 +70,36 @@ export class EyhUserhandlerService {
     return this.firestore.collection('eyh-roles', 
       ref => ref
         .where('role', '==', role))
-        .valueChanges();
+        .valueChanges().pipe(
+          tap(arr => console.log(`read ${arr.length} docs.`)),
+          shareReplay(1)
+        );
   }
 
   getRole(user: SocialUser){   
     return this.firestore.collection('eyh-users', 
       ref => ref
         .where('emailId', '==', user['email'] ))
-        .valueChanges();       
+        .valueChanges().pipe(
+          tap(arr => console.log(`read ${arr.length} docs.`)),
+          shareReplay(1)
+        );       
   }
 
   getRoles(){
-    return this.firestore.collection('eyh-roles', ref => ref).valueChanges();      
+    return this.firestore.collection('eyh-roles', ref => ref).valueChanges().pipe(
+      tap(arr => console.log(`read ${arr.length} docs.`)),
+      shareReplay(1)
+    );      
   }
 
   checkRoute(): Observable<any[]> {
     let user = JSON.parse(localStorage.getItem('socialusers'));
     let role = this.getRole(user);
-    let roles = this.firestore.collection('eyh-roles', ref => ref).valueChanges();
+    let roles = this.firestore.collection('eyh-roles', ref => ref).valueChanges().pipe(
+      tap(arr => console.log(`read ${arr.length} docs.`)),
+      shareReplay(1)
+    );
     return forkJoin([role, roles]);
   }
 

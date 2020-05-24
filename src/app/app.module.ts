@@ -47,6 +47,9 @@ import { YourContributionComponent } from './your-contribution/your-contribution
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AgGridModule } from 'ag-grid-angular';
+import { UpdateEventResolverService } from './resolvers/update-event-resolver.service';
+import { ManageStoryComponent } from './manage-story/manage-story.component';
+import { ManageDonationComponent } from './manage-donation/manage-donation.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -75,7 +78,7 @@ export function socialConfigs() {
     WhoweareComponent, 
     WhatwedoComponent, 
     StoryviewComponent, 
-    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent  
+    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent, ManageStoryComponent, ManageDonationComponent  
   ],  
   imports: [  
     BrowserModule,  
@@ -95,7 +98,8 @@ export function socialConfigs() {
     AgGridModule.withComponents([]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],  
-  providers: [  
+  providers: [
+    UpdateEventResolverService,  
     SessionService,
     AuthService,
     AuthGuardGuard,

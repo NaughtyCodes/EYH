@@ -10,6 +10,7 @@ import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { StoryviewComponent } from './layout/storyview/storyview.component';
 import { UpdateEventsComponent } from './update-events/update-events.component';
 import { ReachUsComponent } from './reach-us/reach-us.component';
+import { UpdateEventResolverService } from './resolvers/update-event-resolver.service';
 
 export const routes: Routes = [    
   {    
@@ -79,7 +80,10 @@ export const routes: Routes = [
     data: {    
       title: 'Update Events'    
     },
-    canActivate: [AuthGuardGuard]  
+    canActivate: [AuthGuardGuard]
+    // resolve: { 
+    //   preLoad: UpdateEventResolverService 
+    // } 
   }
 ];    
 @NgModule({    

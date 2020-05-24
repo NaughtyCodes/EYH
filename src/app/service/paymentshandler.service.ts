@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Payment } from '../models/payment';
 import { EyhUser } from '../models/eyh-user';
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap, shareReplay } from 'rxjs/operators';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 
 
@@ -30,19 +30,22 @@ export class PaymentshandlerService {
 
   paymentMapper(data: any): Payment[] {
     return data.map(e => {
-      const userId = e.payload.doc.data().userId.split("/")[2];
-      return {
-        id: e.payload.doc.id,
-        amount: e.payload.doc.data()['amount'],
-        emailId: e.payload.doc.data()['emailId'],  
-        month: e.payload.doc.data()['month'],
-        timestamp: e.payload.doc.data()['timestamp'],
-        userId: e.payload.doc.data()['userId'],
-        year: e.payload.doc.data()['year'],
-        updatedBy: e.payload.doc.data()['updatedBy'],
-        name: e.payload.doc.data()['name'],
-        note: e.payload.doc.data()['note']
-      } as Payment;
+      if(e.payload === undefined){
+        return e;
+      } else {
+        return {
+          id: e.payload.doc.id,
+          amount: e.payload.doc.data()['amount'],
+          emailId: e.payload.doc.data()['emailId'],  
+          month: e.payload.doc.data()['month'],
+          timestamp: e.payload.doc.data()['timestamp'],
+          userId: e.payload.doc.data()['userId'],
+          year: e.payload.doc.data()['year'],
+          updatedBy: e.payload.doc.data()['updatedBy'],
+          name: e.payload.doc.data()['name'],
+          note: e.payload.doc.data()['note']
+        } as Payment;
+      }
     });
   }
 
@@ -58,11 +61,17 @@ export class PaymentshandlerService {
   }
 
   getPayments() {
-    return this.firestore.collection('eyh-payments').snapshotChanges();
+    return this.firestore.collection('eyh-payments').snapshotChanges().pipe(
+      tap(arr => console.log(`read ${arr.length} docs.`)),
+      shareReplay(1)
+    ); 
   }
 
   getUsers() {
-    return this.firestore.collection('eyh-users').snapshotChanges();
+    return this.firestore.collection('eyh-users').snapshotChanges().pipe(
+      tap(arr => console.log(`read ${arr.length} docs.`)),
+      shareReplay(1)
+    );     
   }
 
   getUser(emailId: any) {
@@ -80,15 +89,23 @@ export class PaymentshandlerService {
     //return {"name":"mohan"};
   }
 
+  //TODO:: for development user to avoid read usage limit set to 2 
   getUserPayedDetails(param: any){
     if(param !== null){
       return this.firestore.collection('eyh-payments', 
         ref => ref
           .where('emailId', '==', param['emailId'])
-          .where('month', '==', param['month']))
-          .valueChanges()
+          .where('month', '==', param['month'])
+          .limit(2))
+          .valueChanges().pipe(
+            tap(arr => console.log(`read ${arr.length} docs.`)),
+            shareReplay(1)
+          );
       } 
-      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges();
+      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        shareReplay(1)
+      );
    //this.getUserPayedDetails$.next(param); 
   }
 
@@ -97,7 +114,10 @@ export class PaymentshandlerService {
         ref => ref
           .where('userId', '==', '/eyh-users/'+id)
           .where('year', '==', year))
-          .valueChanges();     
+          .valueChanges().pipe(
+            tap(arr => console.log(`read ${arr.length} docs.`)),
+            shareReplay(1)
+          );     
   }
 
   queryUserPayedDetails(): any{
@@ -108,9 +128,15 @@ export class PaymentshandlerService {
           ref => ref
             .where('emailId', '==', param['emailId'])
             .where('month', '==', param['month']))
-            .valueChanges()
+            .valueChanges().pipe(
+              tap(arr => console.log(`read ${arr.length} docs.`)),
+              shareReplay(1)
+            );
         } 
-        return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges()
+        return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges().pipe(
+          tap(arr => console.log(`read ${arr.length} docs.`)),
+          shareReplay(1)
+        );
       })
   );
 

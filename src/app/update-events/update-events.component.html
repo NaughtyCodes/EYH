@@ -16,67 +16,31 @@
           </div>
 
           <div for="Manage-Story" class="row tab-menu-view hide-tab" >
-            <table class="list-story-table">
-              <tr>
-                <th>Update</th>
-                <th>Delete</th>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Story</th>
-              </tr>
-              <tr *ngFor="let story of stories">
-                <td><button class="btn" (click)="editStory($event,story);"><i class="pi pi-pencil"></i></button></td>
-                <td><button class="btn" (click)="deleteStory($event,story);"><i class="pi pi-times"></i></button></td>
-                <td>{{story.id}}</td>
-                <td>{{story.storyTitle}}</td>
-                <td>{{story.story | slice:0:200}}</td>
-              </tr>
-            </table>
-
-            <p-dialog [(visible)]="storyFormDisplay" [style]="{width: '80%', height: '500px'}">
-              <p-header>
-                  {{storyFromTitle}}
-              </p-header>
-                <form [formGroup]="storyForm">
-                  <div class="form-group">
-                    <label for="storyTitle">Story Tittle:</label>
-                    <textarea class="form-control" name="storyTitle" formControlName="storyTitle"  rows="2" id="storyTitle"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="story">Story:</label>
-                    <textarea class="form-control" name="story" formControlName="story" rows="10" id="story"></textarea>
-                  </div>
-                  
-                  <input type="file" formControlName="image" (change)="onFileChange($event)" />
-                  <!-- <input type="file" formControlName="image" /> -->
-      
-                  <button style="margin-left:1%" type="submit" (click)="updateStory($event);" class="btn btn-primary">Update</button>
-                  <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
-
-                </form>
-              <!-- <p-footer></p-footer> --> 
-            </p-dialog>
-
+            <!-- <app-manage-story></app-manage-story> -->
+          </div>
+          
+          <div for="Manage-Donation" style="display:none;" class="row tab-menu-view hide-tab">
+            <!-- <app-manage-donation></app-manage-donation> -->
           </div>
 
-          <div for="Home-Info" class="row tab-menu-view hide-tab">
-            <app-homes-info></app-homes-info>
+          <div for="Home-Info" style="display:none;" class="row tab-menu-view hide-tab">
+            <!-- <app-homes-info></app-homes-info> -->
           </div>
 
           <div for="Upcoming-Events" class="row tab-menu-view hide-tab">
-            <app-upcoming-events></app-upcoming-events>
+            <!-- <app-upcoming-events></app-upcoming-events> -->
           </div>
 
-          <div for="Your-Contribution" class="row tab-menu-view hide-tab">
-            <app-your-contribution></app-your-contribution>
+          <div for="Your-Contribution" style="display:none;" class="row tab-menu-view hide-tab">
+            <!-- <app-your-contribution></app-your-contribution> -->
           </div>
 
-          <div for="Contribute-To-EYH" class="row tab-menu-view hide-tab">
+          <div for="Contribute-To-EYH" style="display:none;" class="row tab-menu-view hide-tab">
             <app-contribute-to-eyh></app-contribute-to-eyh>
           </div>
 
-          <div for="Join-To-EYH" class="row tab-menu-view hide-tab">
-            <app-join-to-eyh></app-join-to-eyh>
+          <div for="Join-To-EYH" style="display:none;" class="row tab-menu-view hide-tab">
+            <!-- <app-join-to-eyh></app-join-to-eyh> -->
           </div>
          
       </div>

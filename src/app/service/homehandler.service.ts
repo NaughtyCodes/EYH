@@ -6,6 +6,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TreeNode } from 'primeng/api/treenode';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Home } from '../models/home';
+import { tap } from 'rxjs/internal/operators/tap';
+import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +34,13 @@ export class HomehandlerService {
     }
 
     getHomes() {
-      return this.firestore.collection('eyh-homes-info').snapshotChanges();
+      return this.firestore.collection('eyh-homes-info').snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        shareReplay(1)
+      );
     }
   
     createHomeInfo(home: Home){
-      //console.log(JSON.parse(JSON.stringify(story)));
       return this.firestore.collection('eyh-homes-info').add(home);
     }
   

@@ -1,0 +1,43 @@
+<div class="container">
+<table class="list-story-table">
+    <tr>
+      <th>Update</th>
+      <th>Delete</th>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Story</th>
+    </tr>
+    <tr *ngFor="let story of stories">
+      <td><button class="btn" (click)="editStory($event,story);"><i class="pi pi-pencil"></i></button></td>
+      <td><button class="btn" (click)="deleteStory($event,story);"><i class="pi pi-times"></i></button></td>
+      <td>{{story.id}}</td>
+      <td>{{story.storyTitle}}</td>
+      <td>{{story.story | slice:0:200}}</td>
+    </tr>
+  </table>
+
+  <p-dialog [(visible)]="storyFormDisplay" [style]="{width: '80%', height: '500px'}">
+    <p-header>
+        {{storyFromTitle}}
+    </p-header>
+      <form [formGroup]="storyForm">
+        <div class="form-group">
+          <label for="storyTitle">Story Tittle:</label>
+          <textarea class="form-control" name="storyTitle" formControlName="storyTitle"  rows="2" id="storyTitle"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="story">Story:</label>
+          <textarea class="form-control" name="story" formControlName="story" rows="10" id="story"></textarea>
+        </div>
+        
+        <input type="file" formControlName="image" (change)="onFileChange($event)" />
+        <!-- <input type="file" formControlName="image" /> -->
+
+        <button style="margin-left:1%" type="submit" (click)="updateStory($event);" class="btn btn-primary">Update</button>
+        <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+
+      </form>
+    <!-- <p-footer></p-footer> --> 
+  </p-dialog>
+
+</div>
