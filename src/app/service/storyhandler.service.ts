@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Story } from '../models/story';
 import { tap } from 'rxjs/internal/operators/tap';
 import { shareReplay } from 'rxjs/internal/operators/shareReplay';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class StoryhandlerService {
     getStories() {
       return this.firestore.collection('eyh-stories').snapshotChanges().pipe(
         tap(arr => console.log(`read ${arr.length} docs.`)),
-        shareReplay(1)
+        take(1)
       );
     }
   

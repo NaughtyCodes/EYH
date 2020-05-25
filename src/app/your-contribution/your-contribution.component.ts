@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentshandlerService } from '../service/paymentshandler.service';
 import { formatDate } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-your-contribution',
@@ -11,10 +12,14 @@ export class YourContributionComponent implements OnInit {
 
   isPaymentTableLoaded: boolean = false;
   contribution = {};
+  private title:string;
 
   constructor(
-    private paymentshandlerService: PaymentshandlerService
+    private paymentshandlerService: PaymentshandlerService,
+    private route:ActivatedRoute, private router: Router
     ) {
+      this.title = route.snapshot.data['title'];
+    
       
     // this.contribution = {
     //   'year':'2020',

@@ -7,6 +7,7 @@ import { FirebaseService } from '../service/firebase.service';
 import { Story } from '../models/story';
 import { formatDate } from '@angular/common';
 import { MenuhandlerService } from '../service/menuhandler.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-story',
@@ -25,14 +26,17 @@ export class ManageStoryComponent implements OnInit {
   storyFromTitle = "";
   isUpdate = false;
   selectedStory = {};
+  private title: string;
 
   constructor(
     private storyhandlerService: StoryhandlerService,
     private firebaseService: FirebaseService,
     private menuhandlerService: MenuhandlerService,
     private formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef
-  ) { 
+    private cd: ChangeDetectorRef,
+    private route:ActivatedRoute, private router: Router
+    ) {
+      this.title = route.snapshot.data['title']; 
     this.createStoryUpdateForm();
   }
 

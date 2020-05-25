@@ -8,6 +8,7 @@ import { MenuhandlerService } from '../service/menuhandler.service';
 import { PaymentshandlerService } from '../service/paymentshandler.service';
 import { EyhUser } from '../models/eyh-user';
 import { EyhUserhandlerService } from '../service/eyh-userhandler.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-to-eyh',
@@ -25,13 +26,16 @@ export class JoinToEYHComponent implements OnInit {
   userFromTitle = "";
   formButtonName = "";
   manageUserItems: MenuItem[];
+  private title: string;
 
   constructor(
     private eyhUserhandlerService: EyhUserhandlerService,
     private formBuilder: FormBuilder,
     private menuhandlerService: MenuhandlerService,
-    private paymentshandlerService: PaymentshandlerService
-  ) {
+    private paymentshandlerService: PaymentshandlerService,
+    private route:ActivatedRoute, private router: Router
+    ) {
+      this.title = route.snapshot.data['title'];
     this.createEyhUserUpdateForm();
    }
 

@@ -7,6 +7,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { SocialUser } from 'angular-6-social-login';
 import { tap } from 'rxjs/internal/operators/tap';
 import { shareReplay } from 'rxjs/internal/operators/shareReplay';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,8 @@ export class EyhUserhandlerService {
   getUsers() {
     return this.firestore.collection('eyh-users').snapshotChanges().pipe(
       tap(arr => console.log(`read ${arr.length} docs.`)),
-      shareReplay(1)
-    );     ;
+      take(1)
+    ); 
   }
 
   getUser(emailId: any) {
@@ -72,7 +73,7 @@ export class EyhUserhandlerService {
         .where('role', '==', role))
         .valueChanges().pipe(
           tap(arr => console.log(`read ${arr.length} docs.`)),
-          shareReplay(1)
+          take(1)
         );
   }
 
@@ -82,14 +83,14 @@ export class EyhUserhandlerService {
         .where('emailId', '==', user['email'] ))
         .valueChanges().pipe(
           tap(arr => console.log(`read ${arr.length} docs.`)),
-          shareReplay(1)
+          take(1)
         );       
   }
 
   getRoles(){
     return this.firestore.collection('eyh-roles', ref => ref).valueChanges().pipe(
       tap(arr => console.log(`read ${arr.length} docs.`)),
-      shareReplay(1)
+      take(1)
     );      
   }
 
@@ -98,7 +99,7 @@ export class EyhUserhandlerService {
     let role = this.getRole(user);
     let roles = this.firestore.collection('eyh-roles', ref => ref).valueChanges().pipe(
       tap(arr => console.log(`read ${arr.length} docs.`)),
-      shareReplay(1)
+      take(1)
     );
     return forkJoin([role, roles]);
   }

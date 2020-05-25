@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { Home } from '../models/home';
 import { MenuItem } from 'primeng/api';
 import { MenuhandlerService } from '../service/menuhandler.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-homes-info',
@@ -21,12 +22,15 @@ export class HomesInfoComponent implements OnInit {
   selectedHome = {};
   homeFromTitle = "";
   manageHomeItems: MenuItem[];
+  private title: string;
 
   constructor(
     private homehandlerService: HomehandlerService,
     private formBuilder: FormBuilder,
-    private menuhandlerService: MenuhandlerService
+    private menuhandlerService: MenuhandlerService,
+    private route:ActivatedRoute, private router: Router
   ) {
+    this.title = route.snapshot.data['title'];
     this.createHomeUpdateForm();
    }
 

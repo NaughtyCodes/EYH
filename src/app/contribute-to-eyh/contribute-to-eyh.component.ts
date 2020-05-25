@@ -11,6 +11,7 @@ import { PaymentshandlerService } from '../service/paymentshandler.service';
 import { MenuhandlerService } from '../service/menuhandler.service';
 import { EyhUser } from '../models/eyh-user';
 import { GridOptions } from "ag-grid-community";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contribute-to-eyh',
@@ -18,13 +19,15 @@ import { GridOptions } from "ag-grid-community";
   styleUrls: ['./contribute-to-eyh.component.css']
 })
 export class ContributeToEYHComponent implements OnInit {
+  
+  private title: string;
 
-  constructor() { 
-
+  constructor(private route:ActivatedRoute, private router: Router) { 
+    this.title = route.snapshot.data['title'];
   }
 
   ngOnInit() {
-
+    
   }
 
 

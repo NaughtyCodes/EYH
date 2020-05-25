@@ -21,7 +21,6 @@ export class UpdateEventResolverService implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
     return this.preLoad().pipe(map(res =>{
       return res;
     }));

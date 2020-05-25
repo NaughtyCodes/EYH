@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-upcoming-events',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpcomingEventsComponent implements OnInit {
 
-  
+  private title:string;
   columnDefs = [
     {field: 'make' },
     {field: 'model' },
@@ -20,7 +21,9 @@ export class UpcomingEventsComponent implements OnInit {
       { make: 'Porsche', model: 'Boxter', price: 72000 }
   ];
   
-  constructor() { }
+  constructor(    private route:ActivatedRoute, private router: Router
+    ) {
+      this.title = route.snapshot.data['title']; }
 
   ngOnInit() {
   }

@@ -11,6 +11,13 @@ import { StoryviewComponent } from './layout/storyview/storyview.component';
 import { UpdateEventsComponent } from './update-events/update-events.component';
 import { ReachUsComponent } from './reach-us/reach-us.component';
 import { UpdateEventResolverService } from './resolvers/update-event-resolver.service';
+import { ContributeToEYHComponent } from './contribute-to-eyh/contribute-to-eyh.component';
+import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
+import { ManageDonationComponent } from './manage-donation/manage-donation.component';
+import { ManageStoryComponent } from './manage-story/manage-story.component';
+import { HomesInfoComponent } from './homes-info/homes-info.component';
+import { YourContributionComponent } from './your-contribution/your-contribution.component';
+import { JoinToEYHComponent } from './join-to-eyh/join-to-eyh.component';
 
 export const routes: Routes = [    
   {    
@@ -75,15 +82,71 @@ export const routes: Routes = [
     canActivate: [AuthGuardGuard] 
   },
   {    
-    path: 'update-events',    
-    component: UpdateEventsComponent,    
+    path: 'upcoming-events',    
+    component: UpcomingEventsComponent,    
     data: {    
-      title: 'Update Events'    
+      title: 'EYH - Upcoming Events'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'manage-story',    
+    component: ManageStoryComponent,    
+    data: {    
+      title: 'EYH - Manage Story'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'home-info',    
+    component: HomesInfoComponent,    
+    data: {    
+      title: 'EYH - Orphanage / Oldage Homes Info'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'manage-donation',    
+    component: ManageDonationComponent,    
+    data: {    
+      title: 'EYH - Manage Donation'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'your-contribution',    
+    component: YourContributionComponent,    
+    data: {    
+      title: 'EYH - Your Contribution'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'join-to-eyh',    
+    component: JoinToEYHComponent ,  
+    data: {    
+      title: 'EYH - Join To Expand-Your-Hands'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'contribute-to-eyh',    
+    component: ContributeToEYHComponent,    
+    data: {    
+      title: 'Contribute To EYH'    
     },
     canActivate: [AuthGuardGuard]
     // resolve: { 
-    //   preLoad: UpdateEventResolverService 
-    // } 
+    //  preLoad: UpdateEventResolverService 
+    // }  
+  },
+  {    
+    path: 'update-events',    
+    component: UpcomingEventsComponent,    
+    data: {    
+      title: 'EYH - Upcoming Events'    
+    },
+    canActivate: [AuthGuardGuard]
   }
 ];    
 @NgModule({    

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-donation',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageDonationComponent implements OnInit {
 
-  constructor() { }
+  private title:string;
+
+  constructor( private route:ActivatedRoute, private router: Router
+    ) {
+      this.title = route.snapshot.data['title']; 
+    }
 
   ngOnInit() {
   }

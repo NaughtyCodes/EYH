@@ -1,4 +1,21 @@
 <div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+        <app-update-events></app-update-events>
+  </div>
+  <div class="col-sm-9">
+     
+<div class="container">
+  <h3 style="margin-left: -16px;">{{title}}</h3>
+  <div for="Manage-Story" class="row tab-menu-row" >
+    <p-tabMenu [model]="manageStoryItems">
+        <ng-template pTemplate="item" let-item let-i="index">
+            {{item.label}}
+        </ng-template>
+    </p-tabMenu>
+  </div>
+
+<div class="row">
 <table class="list-story-table">
     <tr>
       <th>Update</th>
@@ -39,5 +56,6 @@
       </form>
     <!-- <p-footer></p-footer> --> 
   </p-dialog>
-
 </div>
+</div>
+  </div></div></div>
