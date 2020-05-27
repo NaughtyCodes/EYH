@@ -135,10 +135,10 @@ export const routes: Routes = [
     data: {    
       title: 'Contribute To EYH'    
     },
-    canActivate: [AuthGuardGuard]
-    // resolve: { 
-    //  preLoad: UpdateEventResolverService 
-    // }  
+    canActivate: [AuthGuardGuard],
+    resolve: { 
+     preLoad: UpdateEventResolverService 
+    }  
   },
   {    
     path: 'update-events',    

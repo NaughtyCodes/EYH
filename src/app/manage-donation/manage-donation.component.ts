@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ManageDonationComponent implements OnInit {
 
-  private title:string;
+  title:string;
 
   constructor( private route:ActivatedRoute, private router: Router
     ) {

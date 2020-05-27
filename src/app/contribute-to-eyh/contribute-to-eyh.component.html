@@ -5,6 +5,108 @@
     </div>
     <div class="col-sm-9">
         <h3 style="margin-left: -16px;">{{title}}</h3>
+
+        <div class="container" style="">
+            <div class="row" style="margin-bottom: 2%; margin-left:-15px;" >
+                <p-tabMenu [model]="manageHomeItems">
+                    <ng-template pTemplate="item" let-item let-i="index">
+                        {{item.label}}
+                    </ng-template>
+                </p-tabMenu>
+            </div>
+        <div class="row">
+                <div for="Add-Contribution" class="row div-toggel-view hide-tab" >
+        
+                    <ag-grid-angular 
+                      style="height:400px; width:100%; min-width:62em;"
+                      class="ag-theme-alpine" 
+                      [rowData]="addContributionRowdata"
+                      [columnDefs]="addContributionColumnDefs"
+                      (gridReady)="onContributionGridReady($event)">
+                    </ag-grid-angular>
+         
+            </div>
+        </div>
+        
+        <div class="row">
+          <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px; width:100%;" >
+              <table class="list-payment-table">
+                <tr>
+                  <th>Update</th>
+                  <th>Delete</th>
+                  <th>Name</th>
+                  <th>User-Id</th>
+                  <th>Month</th>
+                  <th>Contribution</th>
+                  <th>Note</th>
+                  <th>Updated By</th>
+                  <th>TimeStamp</th>
+                </tr>
+                <tr *ngFor="let f of listPayments; let i = index;">
+                
+                  <!-- <tr *ngFor="let p of payments; let i = index"> -->
+                  <td><button class="btn" (click)="editPaymentForm($event,f);"><i class="pi pi-pencil"></i></button></td>
+                  <td><button class="btn" (click)="deletePayments($event,f);"><i class="pi pi-times"></i></button></td>
+                  <td><span>{{f.name || f.emailId || '-'}}</span></td>
+                  <td><span>{{f.userId}}</span></td>
+                  <td><span>{{f.month}}</span></td>
+                  <td><span>{{f.amount}}</span></td>
+                  <td><span>{{f.note }}</span></td>
+                  <td><span>{{f.updatedBy}}</span></td>
+                  <td><span>{{f.timestamp}}</span></td>
+                </tr>
+              </table>
+              </div>
+            
+             
+        </div>
+        
+        <div class="row">
+        
+          <div for="List-Users" class="row div-toggel-view hide-tab" >
+        
+          <ag-grid-angular 
+          style="height:400px; width:100%; min-width:62em;"
+            class="ag-theme-alpine" 
+            [rowData]="eyhUsers"
+            [columnDefs]="userListcolumnDefs"
+            (gridReady)="onGridReady($event)">
+            
+          </ag-grid-angular>
+        
+        </div>
+        </div>
+        
+        <p-dialog [(visible)]="paymentFormDisplay" [style]="{width: '80%', height: '500px'}">
+          <p-header>
+              {{paymentFromTitle}}
+          </p-header>
+            <form [formGroup]="paymentForm">
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <textarea class="form-control" name="name" formControlName="name"  rows="1" id="name" readonly></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="month">Month:</label>
+                  <textarea class="form-control" name="month" formControlName="month"  rows="1" id="month" readonly></textarea>
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount:</label>
+                <textarea class="form-control" name="amount" formControlName="amount"  rows="1" id="amount"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="note">Note:</label>
+              <textarea class="form-control" name="note" formControlName="note"  rows="2" id="note"></textarea>
+          </div>
+        
+              <button style="margin-left:1%" type="submit" (click)="updatePayment($event);" class="btn btn-primary">Update Payment</button>
+              <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+        
+            </form>
+        </p-dialog>
+        
+        </div>
+
     </div>
     </div>
 </div>

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpcomingEventsComponent implements OnInit {
 
-  private title:string;
+  title:string;
   columnDefs = [
     {field: 'make' },
     {field: 'model' },

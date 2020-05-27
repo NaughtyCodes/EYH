@@ -96,7 +96,7 @@ export class PaymentshandlerService {
         ref => ref
           .where('emailId', '==', param['emailId'])
           .where('month', '==', param['month'])
-          .limit(2))
+          )//.limit(2))
           .valueChanges().pipe(
             tap(arr => console.log(`read ${arr.length} docs.`)),
             take(1)
@@ -115,7 +115,7 @@ export class PaymentshandlerService {
         ref => ref
           .where('userId', '==', '/eyh-users/'+id)
           .where('year', '==', year)
-          .limit(2))
+          )//.limit(2))
           .valueChanges().pipe(
             tap(arr => console.log(`read ${arr.length} docs.`)),
             take(1)

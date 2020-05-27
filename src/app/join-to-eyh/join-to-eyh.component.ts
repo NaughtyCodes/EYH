@@ -26,7 +26,7 @@ export class JoinToEYHComponent implements OnInit {
   userFromTitle = "";
   formButtonName = "";
   manageUserItems: MenuItem[];
-  private title: string;
+  title: string;
 
   constructor(
     private eyhUserhandlerService: EyhUserhandlerService,

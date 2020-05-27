@@ -22,7 +22,7 @@ export class HomesInfoComponent implements OnInit {
   selectedHome = {};
   homeFromTitle = "";
   manageHomeItems: MenuItem[];
-  private title: string;
+  title: string;
 
   constructor(
     private homehandlerService: HomehandlerService,

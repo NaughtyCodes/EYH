@@ -26,7 +26,7 @@ export class ManageStoryComponent implements OnInit {
   storyFromTitle = "";
   isUpdate = false;
   selectedStory = {};
-  private title: string;
+  title: string;
 
   constructor(
     private storyhandlerService: StoryhandlerService,

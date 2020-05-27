@@ -12,7 +12,7 @@ export class YourContributionComponent implements OnInit {
 
   isPaymentTableLoaded: boolean = false;
   contribution = {};
-  private title:string;
+  title:string;
 
   constructor(
     private paymentshandlerService: PaymentshandlerService,
