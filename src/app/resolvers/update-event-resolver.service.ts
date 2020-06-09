@@ -30,7 +30,6 @@ export class UpdateEventResolverService implements Resolve<any> {
   preLoad(): Observable<any[]> {
 
     let p =  this.paymentshandlerService.getUserPayedDetails({ 
-      'emailId': this.user['email'], 
       'month':formatDate(new Date(), 'MMMM', 'en-US', '+0530')
     });
     let u =  this.eyhUserhandlerService.getUsers();

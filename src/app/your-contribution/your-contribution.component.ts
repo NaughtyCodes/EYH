@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentshandlerService } from '../service/paymentshandler.service';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Socialusers } from '../models/socialusers';
+
 
 @Component({
   selector: 'app-your-contribution',
@@ -9,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./your-contribution.component.css']
 })
 export class YourContributionComponent implements OnInit {
-
+  socialusers = new Socialusers();
   isPaymentTableLoaded: boolean = false;
   contribution = {};
   title:string;
@@ -19,6 +21,7 @@ export class YourContributionComponent implements OnInit {
     private route:ActivatedRoute, private router: Router
     ) {
       this.title = route.snapshot.data['title'];
+      this.socialusers = JSON.parse(localStorage.getItem('socialusers'));
     
       
     // this.contribution = {
@@ -69,31 +72,31 @@ export class YourContributionComponent implements OnInit {
       'November',
       'December'
       ];
-    this.paymentshandlerService.getUsers().subscribe(u =>{
-      this.paymentshandlerService.eyhUserMapper(u).
-      forEach(user => {
-        let r = {};
-        r['name']  = user['name'];
-        this.paymentshandlerService.getPaymentsByUser(user['id'].toString(), formatDate(new Date(), 'yyyy', 'en-US', '+0530'))
-        .subscribe(p => {
-          //console.log(JSON.stringify(p));
-          r['total'] = p.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
-          r['months'] = {};
-          months.forEach(m => {
-            r['months'][m.substr(0,3).toLowerCase()]  = p
-            .filter(p=>p['month'] === m)
-            .map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
+        this.paymentshandlerService.getEyhUsers(this.socialusers.email,this.socialusers.role).subscribe(u =>{
+          this.paymentshandlerService.eyhUserMapper(u).
+          forEach(user => {
+            let r = {};
+            r['name']  = user['name'];
+            this.paymentshandlerService.getPaymentsByUser(user['id'].toString(), formatDate(new Date(), 'yyyy', 'en-US', '+0530'))
+            .subscribe(p => {
+              //console.log(JSON.stringify(p));
+              r['total'] = p.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
+              r['months'] = {};
+              months.forEach(m => {
+                r['months'][m.substr(0,3).toLowerCase()]  = p
+                .filter(p=>p['month'] === m)
+                .map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
+              });
+              console.log(JSON.stringify(r['months']));
+              payments.push(r);
+              this.contribution['year']     = formatDate(new Date(), 'yyyy', 'en-US', '+0530');
+              this.contribution['sumTotal'] = payments.map(p => parseInt(p['total'])).reduce((a,b) => a + b, 0);
+              this.contribution['payments'] = payments;
+              console.log(JSON.stringify(this.contribution));
+              this.isPaymentTableLoaded = payments.length === u.length;
+            });
           });
-          console.log(JSON.stringify(r['months']));
-          payments.push(r);
-          this.contribution['year']     = formatDate(new Date(), 'yyyy', 'en-US', '+0530');
-          this.contribution['sumTotal'] = payments.map(p => parseInt(p['total'])).reduce((a,b) => a + b, 0);
-          this.contribution['payments'] = payments;
-          console.log(JSON.stringify(this.contribution));
-          this.isPaymentTableLoaded = payments.length === u.length;
         });
-      });
-    });
   }
   
 

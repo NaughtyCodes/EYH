@@ -198,3 +198,14 @@ table > tr:nth-child(odd) {
 }
 
 /*--------------------------------------*/
+.btn-color{
+    background: #00af66 !important;
+    border-color: #00af66 !important;
+}
+.refresh-btn,.refresh-btn:hover{
+    margin-left: 1%;
+    margin-bottom: 0%;
+    color: white;
+    background-color: #00af66;
+    padding: 1px 6px !important;
+}

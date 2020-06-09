@@ -22,29 +22,29 @@
     font-weight: bold;
 }
 
-table > tr:first-child {
+table > thead >tr:first-child {
     background-color: #00af66 !important;
     color: white !important;
-    border:1px solid #25282a;
+    /* border:1px solid #25282a; */
 }
 
 
-table > tr > td:first-child {
+table >tbody> tr > td:first-child {
     background-color: #f7f5f5 !important;
     color: #25282a !important;
-    padding: 1% 2% 1% 2%;
+    /*padding: 1% 2% 1% 2%;*/
 }
 
-table > tr > td:last-child {
+table > tbody> tr > td:last-child {
     background: #ffc107;
     font-weight: bold;
     color: #25282a !important;
-    padding: 1% 2% 1% 2%;
+    /* padding: 1% 2% 1% 2%; */
 }
 
-table > tr > td{
+table >tbody> tr > td{
     background-color: #edfff7;
     color: #25282a;
-    padding: 1% 2% 1% 2%;
-    border:1px solid #25282a;
+    /* padding: 1% 2% 1% 2%; */
+    /* border:1px solid #25282a; */
 }

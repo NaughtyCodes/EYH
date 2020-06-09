@@ -14,6 +14,7 @@ import { UpdateEventResolverService } from './resolvers/update-event-resolver.se
 import { ContributeToEYHComponent } from './contribute-to-eyh/contribute-to-eyh.component';
 import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
 import { ManageDonationComponent } from './manage-donation/manage-donation.component';
+import { RunningBalanceComponent } from './running-balance/running-balance.component'
 import { ManageStoryComponent } from './manage-story/manage-story.component';
 import { HomesInfoComponent } from './homes-info/homes-info.component';
 import { YourContributionComponent } from './your-contribution/your-contribution.component';
@@ -110,6 +111,14 @@ export const routes: Routes = [
     component: ManageDonationComponent,    
     data: {    
       title: 'EYH - Manage Donation'    
+    },
+    canActivate: [AuthGuardGuard] 
+  },
+  {    
+    path: 'running-balance',    
+    component: RunningBalanceComponent,    
+    data: {    
+      title: 'EYH - Running Balance'    
     },
     canActivate: [AuthGuardGuard] 
   },

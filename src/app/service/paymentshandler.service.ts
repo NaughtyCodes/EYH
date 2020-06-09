@@ -61,7 +61,11 @@ export class PaymentshandlerService {
   }
 
   getPayments() {
-    return this.firestore.collection('eyh-payments').snapshotChanges().pipe(
+    return this.firestore.collection('eyh-payments',
+    ref => ref
+    .where('month', '==','June')
+    .limit(10)
+    ).snapshotChanges().pipe(
       tap(arr => console.log(`read ${arr.length} docs.`)),
       take(1)
     ); 
@@ -73,7 +77,25 @@ export class PaymentshandlerService {
       take(1)
     );     
   }
-
+  getEyhUsers(emailId:any,role:any) {
+    if(role=="eyh-admin")
+    {
+      return this.firestore.collection('eyh-users').snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        take(1)
+      );     
+    }
+    else
+    {
+      return this.firestore.collection('eyh-users',
+      ref => ref
+      .where('emailId', '==',emailId)
+      ).snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        take(1)
+      );
+    }
+  }
   getUser(emailId: any) {
     let eyhUser: EyhUser;
     this.getUsers().subscribe(data => {
@@ -94,15 +116,33 @@ export class PaymentshandlerService {
     if(param !== null){
       return this.firestore.collection('eyh-payments', 
         ref => ref
-          .where('emailId', '==', param['emailId'])
+          //.where('emailId', '==', param['emailId'])
           .where('month', '==', param['month'])
           )//.limit(2))
-          .valueChanges().pipe(
+          .snapshotChanges().pipe(
             tap(arr => console.log(`read ${arr.length} docs.`)),
             take(1)
           );
       } 
-      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).valueChanges().pipe(
+      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '').where('month', '==', '')).snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        take(1)
+      );
+   //this.getUserPayedDetails$.next(param); 
+  }
+  getUserPayedAllDetails(param: any){
+    if(param !== null){
+      return this.firestore.collection('eyh-payments', 
+        ref => ref
+          .where('emailId', '==', param['emailId'])
+          .where('year', '==', param['year'])
+          )//.limit(2))
+          .snapshotChanges().pipe(
+            tap(arr => console.log(`read ${arr.length} docs.`)),
+            take(1)
+          );
+      } 
+      return this.firestore.collection('eyh-payments', ref => ref.where('emailId', '==', '')).snapshotChanges().pipe(
         tap(arr => console.log(`read ${arr.length} docs.`)),
         take(1)
       );

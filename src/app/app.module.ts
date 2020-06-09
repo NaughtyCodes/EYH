@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';  
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';//Added by Rajesh T
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,8 @@ import { TabMenuModule} from 'primeng/tabmenu';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { UpdateEventsComponent } from './update-events/update-events.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';//Added by Rajesh T
+import {ToastModule} from 'primeng/toast';//Added by Rajesh T
 
 import { environment } from '../environments/environment';
 
@@ -50,6 +53,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UpdateEventResolverService } from './resolvers/update-event-resolver.service';
 import { ManageStoryComponent } from './manage-story/manage-story.component';
 import { ManageDonationComponent } from './manage-donation/manage-donation.component';
+import {RunningBalanceComponent} from './running-balance/running-balance.component'
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -78,7 +82,7 @@ export function socialConfigs() {
     WhoweareComponent, 
     WhatwedoComponent, 
     StoryviewComponent, 
-    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent, ManageStoryComponent, ManageDonationComponent  
+    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent, ManageStoryComponent, ManageDonationComponent,RunningBalanceComponent  
   ],  
   imports: [  
     BrowserModule,  
@@ -86,11 +90,14 @@ export function socialConfigs() {
     HttpClientModule,  
     AppRoutingModule,
     NgbModule ,
+    FormsModule,//Added by Rajesh T
     TreeModule,
     MenuModule,
     TabMenuModule,
     DialogModule,
     InputTextModule,
+    ConfirmDialogModule,
+    ToastModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
