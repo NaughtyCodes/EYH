@@ -6,31 +6,58 @@
     <div class="col-sm-9">
         <h3 style="margin-left: -16px;">{{title}}</h3>
 
-        <div class="container" style="">
+        <div class="container">
             <div class="row" style="margin-bottom: 2%; margin-left:-15px;" >
                 <p-tabMenu [model]="manageHomeItems">
                     <ng-template pTemplate="item" let-item let-i="index">
                         {{item.label}}
                     </ng-template>
                 </p-tabMenu>
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                <div for="List-Payments" class="col-sm-4 form-group row div-toggel-view hide-tab">
+                  <select class="form-control"  [(ngModel)]="selectedValue" name="users" rows="1"(change)="changeUser($event)">
+                    <option [ngValue]="" disabled>Choose the user</option>
+                    <option *ngFor="let user of eyhUsers" [ngValue]="user.emailId">{{user.name}}</option>
+                  </select>
+                </div>
+                <div for="List-Payments" class="col-sm-2 form-group row div-toggel-view hide-tab">
+                  <button (click)="getReloadData()" class="btn refresh-btn"><i class="pi pi-replay" style="font-size: 2em"></i></button>
+                </div>
+                <div for="List-Payments" class="col-sm-1 form-group row div-toggel-view hide-tab">
+                  <button (click)="deleteAllPayments()" class="btn del-btn"><i class="pi pi-trash" style="font-size: 1em"></i></button>
+                </div>
             </div>
+            <p-toast position="top-right"></p-toast>
         <div class="row">
                 <div for="Add-Contribution" class="row div-toggel-view hide-tab" >
-        
-                    <ag-grid-angular 
-                      style="height:400px; width:100%; min-width:62em;"
-                      class="ag-theme-alpine" 
-                      [rowData]="addContributionRowdata"
-                      [columnDefs]="addContributionColumnDefs"
-                      (gridReady)="onContributionGridReady($event)">
-                    </ag-grid-angular>
+                <!--Modified by Rajesh T-->
+              
+                <p-dialog position="top-left" [(visible)]="display" [style]="{width: '30vw'}" >
+                    <p-header>
+                        Warning!
+                    </p-header>
+                    {{content}}
+                </p-dialog>
+                  <ag-grid-angular      
+                    style="height:400px; width:100%; min-width:62em;"
+                    class="ag-theme-alpine" 
+                    [rowData]="addContributionRowdata"
+                    [columnDefs]="addContributionColumnDefs"
+                    (gridReady)="onGridReady($event)"
+                    rowSelection="multiple"
+                    >
+                  </ag-grid-angular>
+                  <br>
+                  <button (click)="getSelectedRows()" class="btn btn-primary btn-color">Update</button>
+              <!--End-->
          
             </div>
         </div>
         
         <div class="row">
-          <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px; width:100%;" >
-              <table class="list-payment-table">
+            <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px; width:100%;" >
+              <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
+            <table class="list-payment-table">
                 <tr>
                   <th>Update</th>
                   <th>Delete</th>
@@ -57,23 +84,18 @@
                 </tr>
               </table>
               </div>
-            
-             
         </div>
         
         <div class="row">
-        
           <div for="List-Users" class="row div-toggel-view hide-tab" >
-        
-          <ag-grid-angular 
-          style="height:400px; width:100%; min-width:62em;"
+          <!--Modified by Rajesh T-->
+            <ag-grid-angular 
+            style="height:400px; width:100%; min-width:62em;"
             class="ag-theme-alpine" 
             [rowData]="eyhUsers"
-            [columnDefs]="userListcolumnDefs"
-            (gridReady)="onGridReady($event)">
-            
-          </ag-grid-angular>
-        
+            [columnDefs]="userListcolumnDefs">
+            </ag-grid-angular>
+          <!--End-->
         </div>
         </div>
         
@@ -99,8 +121,8 @@
               <textarea class="form-control" name="note" formControlName="note"  rows="2" id="note"></textarea>
           </div>
         
-              <button style="margin-left:1%" type="submit" (click)="updatePayment($event);" class="btn btn-primary">Update Payment</button>
-              <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary">Clear</button>
+              <button style="margin-left:1%" type="submit" (click)="updatePayment($event);" class="btn btn-primary btn-color">Update Payment</button>
+              <button style="margin-left:1%" type="submit" (click)="clearForm();" class="btn btn-primary btn-color">Clear</button>
         
             </form>
         </p-dialog>

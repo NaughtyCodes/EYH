@@ -9,10 +9,11 @@
     <h3 style="margin-left: -16px;">{{title}}</h3>
     <div class="row contribution-table" *ngIf="isPaymentTableLoaded;">
         <p>Note: All currency values represented in INR (Indian Rupees).</p>
-        <div class="year-heading" style=""><span>{{contribution['year']}}</span></div>
-        <table style="padding: 5px;">
+        <div class="year-heading"><span>{{contribution['year']}}</span></div>
+        <table class="table table-bordered" style="padding: 5px;">
+            <thead>
             <tr>
-                <th class="v-txt">Name</th>
+                <th>Name</th>
                 <th class="v-txt">Jan</th>
                 <th class="v-txt">Feb</th>
                 <th class="v-txt">Mar</th>
@@ -27,6 +28,8 @@
                 <th class="v-txt">Dec</th>
                 <th class="v-txt">Total</th>
             </tr>
+            </thead>
+            <tbody>
             <tr *ngFor="let p of contribution['payments']; let i = index;">
                 <td>{{p.name}}</td>
                 <td>{{p.months.jan}}</td>
@@ -47,6 +50,7 @@
                 <td colspan="13">Total</td>
                 
                 <td>{{contribution['sumTotal']}}</td>
+            </tbody>
         </table>
     </div>
 </div>

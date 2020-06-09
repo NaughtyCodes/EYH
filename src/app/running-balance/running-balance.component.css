@@ -1,0 +1,9 @@
+.bg-primary-cus{
+    background-color: #5696db !important;
+}
+.bg-danger-cus{
+    background-color: #e84d5b !important;
+}
+.card-header,thead{
+    color: white !important;
+}

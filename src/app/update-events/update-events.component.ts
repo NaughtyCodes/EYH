@@ -67,7 +67,7 @@ export class UpdateEventsComponent {
         },
         {
           label: 'Manage-Donation', 
-          icon: 'pi pi-globe',
+          icon: 'pi pi-money-bill',
           command: ($event) => {
             //this.menuHeading = "EYH - Manage Donation";
             //this.menuhandlerService.active($event);
@@ -76,7 +76,7 @@ export class UpdateEventsComponent {
         },
         {
           label: 'Your-Contribution', 
-          icon: 'pi pi-globe',
+          icon: 'pi pi-user',
           command: ($event) => {
             //this.menuHeading = "EYH - Your Contribution";
             //this.menuhandlerService.active($event);
@@ -85,7 +85,7 @@ export class UpdateEventsComponent {
         },
         {
           label: 'Contribute-To-EYH', 
-          icon: 'pi pi-globe',
+          icon: 'pi pi-sort-amount-up',
           command: ($event) => {
             //this.menuHeading = "EYH - Contribute To Expand-Your-Hands";
             //this.menuhandlerService.active($event);
@@ -94,7 +94,7 @@ export class UpdateEventsComponent {
         },
         {
           label: 'Join-To-EYH', 
-          icon: 'pi pi-globe',
+          icon: 'pi pi-user-plus',
           command: ($event) => {
             //this.menuHeading = "EYH - Join To Expand-Your-Hands";
             //this.menuhandlerService.active($event);

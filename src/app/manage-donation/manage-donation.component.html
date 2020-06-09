@@ -5,5 +5,187 @@
     </div>
     <div class="col-sm-9">
         <h3 style="margin-left: -16px;">{{title}}</h3>
-<p>manage-donation works!</p>
-    </div></div></div>
+        <div class="container">
+                <div class="row" style="margin-bottom: 2%; margin-left:-15px;" >
+                    <p-tabMenu [model]="manageDonationItems">
+                        <ng-template pTemplate="item" let-item let-i="index">
+                            {{item.label}}
+                        </ng-template>
+                    </p-tabMenu>
+                    <div for="List-Donations" class="col-sm-3 form-group row div-toggel-view hide-tab">
+                        <button (click)="getAllDoantions()" class="btn refresh-btn btn-menu">List All</button>
+                     </div>
+                     <div for="Running-Balance" class="col-sm-3 form-group row div-toggel-view hide-tab">
+                                <button (click)="test.runningBalReload()" class="btn refresh-btn"><i class="pi pi-replay" style="font-size: 2em"></i></button>
+                         </div>
+                </div>
+                <p-toast position="top-right"></p-toast>
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                <div for="Add-Donations" class="row div-toggel-view hide-tab" >
+                <form [formGroup]="donationForm">
+                    <div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                            <div class="col-sm-5 form-group">
+                                                    <label for="fundRequestedBy">FundRequestedBy<span class="indicator">*</span></label>
+                                                    <select class="form-control" name="fundRequestedBy" formControlName="fundRequestedBy"  rows="1" id="fundRequestedBy" (change)="changeUser($event)"
+                                                    [ngClass]="{'is-invalid': submitted && fval.fundRequestedBy.errors }">
+                                                            <option value="" disabled>Choose the user</option>
+                                                            <option Value="Others">Others</option>
+                                                            <option *ngFor="let user of eyhUsers" [ngValue]="user.name">{{user.name}}</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && fval.fundRequestedBy.errors" class="invalid-feedback">
+                                                            <div *ngIf="fval.fundRequestedBy.errors.required">Please choose the requested user</div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-7 form-group">
+                                                    <label for="Others">Others<span *ngIf="isOthersEditable" class="indicator">*</span></label>
+                                                    <input class="form-control" name="Others" formControlName="Others"  rows="2" id="Others" placeholder="Enter other request.." [readonly]="isReadonly"
+                                                    [ngClass]="{'is-invalid': submitted && fval.Others.errors }"/>
+                                                    <div *ngIf="submitted && fval.Others.errors" class="invalid-feedback">
+                                                            <div *ngIf="fval.Others.errors.required">Please enter the others details</div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-12 form-group"  >
+                                                    <label for="donatedTo">DonatedTo<span class="indicator">*</span></label>
+                                                    <textarea class="form-control" name="donatedTo" formControlName="donatedTo"  rows="1" id="donatedTo" placeholder="Enter Beneficiary.. " required=""
+                                                    [ngClass]="{'is-invalid': submitted && fval.donatedTo.errors }"></textarea>
+                                                    <div *ngIf="submitted && fval.donatedTo.errors" class="invalid-feedback">
+                                                            <div *ngIf="fval.donatedTo.errors.required">Please enter the donatedTo details</div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-5 form-group"> 
+                                                <label for="donatedDate">DonatedDate<span class="indicator">*</span></label>
+                                                <input class="form-control" name="donatedDate" formControlName="donatedDate" type="date"  rows="1" id="donatedDate" required 
+                                                [ngClass]="{'is-invalid': submitted && fval.donatedDate.errors }"/>
+                                                <div *ngIf="submitted && fval.donatedDate.errors" class="invalid-feedback">
+                                                        <div *ngIf="fval.donatedDate.errors.required">Please choose the donated date</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7 form-group">
+                                                <label for="fundReleasedBy">FundReleasedBy</label>
+                                                <input class="form-control" name="fundReleasedBy" formControlName="fundReleasedBy"  rows="1" id="fundReleasedBy" readonly/>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <label for="spentAmount">Spend Amount:<span class="indicator">*</span></label>
+                                                <input class="form-control" name="spendAmount" formControlName="spendAmount" type="number" rows="1" id="spendAmount" placeholder="Enter the amount"
+                                                [ngClass]="{'is-invalid': submitted && fval.spendAmount.errors }"/>
+                                                <div *ngIf="submitted && fval.spendAmount.errors" class="invalid-feedback">
+                                                        <div *ngIf="fval.spendAmount.errors.required">Please enter spend amount</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <label for="Month">Month:</label>
+                                                <input class="form-control" name="Month" formControlName="Month"  rows="1" id="Month" readonly/>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <label for="Year">Year</label>
+                                                <input class="form-control" name="Year" formControlName="Year"  rows="2" id="Year" readonly/>
+                                            </div>
+                                            <div class="col-sm-3">
+                                            <button style="margin-left:1%" type="submit" (click)="saveDonation($event);" class="btn btn-primary btn-color">Save</button>
+                                            </div>
+                                        </div>
+                            </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div for="List-Donations" class="row div-toggel-view hide-tab" >
+                    <ag-grid-angular 
+                    style="height:400px; width:100%; min-width:62em;"
+                      class="ag-theme-alpine" 
+                      [rowData]="addDonationRowdata"
+                      [columnDefs]=" addDonationColumnDefs"
+                      rowSelection="multiple"
+                      (gridReady)="onGridReady($event)"
+                      >                   
+                    </ag-grid-angular>
+                    <br>
+                      <button style="margin-left:1%" class="btn btn-primary btn-color" (click)="SelectedRowsforUpdate()">Update</button>
+                      <button style="margin-left:1%" class="btn btn-primary btn-color" (click)="SelectedRowsforDelete()">Delete</button>
+                      <button style="margin-left:1%" class="btn btn-primary btn-color" (click)="SelectedRowforEdit()">Edit</button>
+                      <p-dialog [(visible)]="donationFormDisplay" [style]="{width: '80%', height: '500px'}">
+                            <p-header>
+                                Donation Details to Modify
+                            </p-header>
+                              <form [formGroup]="donationEditForm">
+                                    <div class="card">
+                                            <div class="card-body">
+                                                    <div class="row">
+                                                            <div class="col-sm-4 form-group" style="display:none;">
+                                                                <label for="donatedid">DonatedId</label>
+                                                                <input class="form-control" name="donatedid" formControlName="donatedid" rows="1" id="donatedid" />
+                                                            </div>
+                                                            <div class="col-sm-5 form-group">
+                                                                    <label for="fundRequestedBy">FundRequestedBy<span class="indicator">*</span></label>
+                                                                    <select class="form-control" name="fundRequestedBy" formControlName="fundRequestedBy"  rows="1" id="fundRequestedBy" (change)="changeUserEdit($event)"
+                                                                    [ngClass]="{'is-invalid': submitted && fEval.fundRequestedBy.errors }">
+                                                                            <option value="" disabled>Choose the user</option>
+                                                                            <option Value="Others">Others</option>
+                                                                            <option *ngFor="let user of eyhUsers" [ngValue]="user.name">{{user.name}}</option>
+                                                                    </select>
+                                                                    <div *ngIf="submitted && fEval.fundRequestedBy.errors" class="invalid-feedback">
+                                                                            <div *ngIf="fEval.fundRequestedBy.errors.required">Please choose the requested user</div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-sm-7 form-group">
+                                                                    <label for="Others">Others<span *ngIf="isOthersEditable" class="indicator">*</span></label>
+                                                                    <input class="form-control" name="Others" formControlName="Others"  rows="2" id="Others" placeholder="Enter other request.." [readonly]="isReadonly"
+                                                                    [ngClass]="{'is-invalid': submitted && fEval.Others.errors }"/>
+                                                                    <div *ngIf="submitted && fEval.Others.errors" class="invalid-feedback">
+                                                                            <div *ngIf="fEval.Others.errors.required">Please enter the others details</div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-sm-12 form-group"  >
+                                                                    <label for="donatedTo">DonatedTo<span class="indicator">*</span></label>
+                                                                    <textarea class="form-control" name="donatedTo" formControlName="donatedTo"  rows="1" id="donatedTo" placeholder="Enter Beneficiary.. " required=""
+                                                                    [ngClass]="{'is-invalid': submitted && fEval.donatedTo.errors }"></textarea>
+                                                                    <div *ngIf="submitted && fEval.donatedTo.errors" class="invalid-feedback">
+                                                                            <div *ngIf="fEval.donatedTo.errors.required">Please enter the donatedTo details</div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-sm-5 form-group"> 
+                                                                <label for="donatedDate">DonatedDate<span class="indicator">*</span></label>
+                                                                <input class="form-control" name="donatedDate" formControlName="donatedDate" type="date"  rows="1" id="donatedDate" required 
+                                                                [ngClass]="{'is-invalid': submitted && fEval.donatedDate.errors }"/>
+                                                                <div *ngIf="submitted && fEval.donatedDate.errors" class="invalid-feedback">
+                                                                        <div *ngIf="fEval.donatedDate.errors.required">Please choose the donated date</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-7 form-group">
+                                                                <label for="fundReleasedBy">FundReleasedBy</label>
+                                                                <input class="form-control" name="fundReleasedBy" formControlName="fundReleasedBy"  rows="1" id="fundReleasedBy" readonly/>
+                                                            </div>
+                                                            <div class="col-sm-4 form-group">
+                                                                <label for="spentAmount">Spend Amount:<span class="indicator">*</span></label>
+                                                                <input class="form-control" name="spendAmount" formControlName="spendAmount" type="number" rows="1" id="spendAmount" placeholder="Enter the amount"
+                                                                [ngClass]="{'is-invalid': submitted && fEval.spendAmount.errors }"/>
+                                                                <div *ngIf="submitted && fEval.spendAmount.errors" class="invalid-feedback">
+                                                                        <div *ngIf="fEval.spendAmount.errors.required">Please enter spend amount</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 form-group">
+                                                                <label for="Month">Month:</label>
+                                                                <input class="form-control" name="Month" formControlName="Month"  rows="1" id="Month" readonly/>
+                                                            </div>
+                                                            <div class="col-sm-4 form-group">
+                                                                <label for="Year">Year</label>
+                                                                <input class="form-control" name="Year" formControlName="Year"  rows="2" id="Year" readonly/>
+                                                            </div>
+                                                                <button style="margin-left:1%" type="submit" (click)="updateDonation($event);" class="btn btn-primary btn-color">Save</button>
+                                                        </div>
+                                            </div>
+                                    </div>
+                              </form>
+                            <!-- <p-footer></p-footer> --> 
+                          </p-dialog>
+            </div>
+            <div for="Running-Balance" class="row div-toggel-view hide-tab" >
+                        <app-running-balance #test></app-running-balance>
+            </div>
+                  
+        </div>
+    </div>
+    </div>
+</div>

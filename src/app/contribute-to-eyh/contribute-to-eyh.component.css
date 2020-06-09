@@ -50,4 +50,8 @@ table > tr:nth-child(even) {
 table > tr:nth-child(odd) {
     background: #FFF;
 }
-
+.del-btn{
+    display: none;
+    color: white;
+    background-color: tomato;
+}
