@@ -12,7 +12,8 @@ import { EyhUser } from '../models/eyh-user';
 import {Donations} from '../models/donations';
 import {ConfirmationService} from 'primeng/api'//Added by Rajesh T
 import {MessageService} from 'primeng/api';
-import {RunningBalanceComponent} from '../running-balance/running-balance.component'
+import {RunningBalanceComponent} from '../running-balance/running-balance.component';
+import { ButtonRendererComponent } from '../button-render/button-render.component';
 @Component({
   selector: 'app-manage-donation',
   templateUrl: './manage-donation.component.html',
@@ -28,14 +29,17 @@ export class ManageDonationComponent implements OnInit {
   isUpdate:boolean=false;
   isDelete:boolean=false;
   submitted = false;
-  isReadonly:boolean=true;
+  isReadonly:boolean=false;
+  isReadonlyOthers:boolean=true;
   isOthersEditable:boolean=false;
+  isEditable:boolean=true;
 
   eyhUsers: any;
   manageDonationItems: MenuItem[];
   addDonationRowdata:any;
   private gridApi;//Added by Rajesh T
   private gridColumnApi;//Added by Rajesh T
+  frameworkComponents: any;
 
   constructor( 
     private managedonationhandlerService: ManageDonationhandlerService,
@@ -50,8 +54,19 @@ export class ManageDonationComponent implements OnInit {
       this.title = route.snapshot.data['title'];
       this.createDonationForm(); 
       this.EditDonationForm();
+      this.frameworkComponents = {
+        buttonRenderer: ButtonRendererComponent,
+      }
     }
     addDonationColumnDefs = [
+      {field:'',width:41,
+      cellRenderer: 'buttonRenderer',
+      // cellRenderer: (data) => {
+      //   return `<button class="btn" style="padding:1px 6px !important" click="onClick(data)"><i class="pi pi-info-circle" style="font-size:1.50em"></i></button`;
+    cellRendererParams: {
+      onClick: this.onBtnClick1.bind(this),
+      label: 'click'
+    }},
       {field: 'donatedDate', checkboxSelection: true, headerCheckboxSelection: true,editable:true,sortable: true,filter:true },
       {field: 'donatedTo',width:300,editable:true,sortable: true,filter:true,singleClickEdit:true,cellEditor: 'agLargeTextCellEditor',
       cellEditorParams: {
@@ -67,6 +82,7 @@ export class ManageDonationComponent implements OnInit {
       {field: 'lastUpdated',sortable: true,filter:true},
       {field: 'Others',editable:true,sortable: true,filter:true}
     ]
+   
     // addDonationRowdata=[
     //   {
     //     "Month": "May",
@@ -170,13 +186,13 @@ export class ManageDonationComponent implements OnInit {
     console.log(selectedVal)
     if(selectedVal=="Others")
       {
-        this.isReadonly=false;
+        this.isReadonlyOthers=false;
         this.isOthersEditable=true;
         this.donationEditForm.controls['Others'].setValue('');
       }
       else
       {
-        this.isReadonly=true;
+        this.isReadonlyOthers=true;
         this.isOthersEditable=false;
         this.donationEditForm.controls['Others'].setValue('Requested By User');
       }
@@ -310,6 +326,9 @@ export class ManageDonationComponent implements OnInit {
         else if(selectedRow.length==1)
         {
         this.donationFormDisplay=true
+        this.isReadonly=false;
+        this.isEditable=true;
+        this.donationEditForm.controls['fundRequestedBy'].enable()
         selectedRow.forEach((r,index) => {
         let rowid=r["id"]
         console.log(rowid)
@@ -400,5 +419,23 @@ export class ManageDonationComponent implements OnInit {
               });
             }
         });
+      }
+      onBtnClick1(e) {
+        this.donationFormDisplay=true
+        console.log(e)
+        this.isReadonly=true;
+        this.isEditable=false;
+        this.donationEditForm.controls['fundRequestedBy'].disable();
+        this.donationEditForm.controls['donatedid'].setValue(e.rowData['id']);
+          this.donationEditForm.controls['donatedDate'].setValue(e.rowData['donatedDate']);
+          this.donationEditForm.controls['donatedTo'].setValue(e.rowData['donatedTo']);
+          this.donationEditForm.controls['fundReleasedBy'].setValue(e.rowData['fundReleasedBy']);
+          this.donationEditForm.controls['fundRequestedBy'].setValue(e.rowData['fundRequestedBy']);
+          this.donationEditForm.controls['lastUpdated'].setValue(e.rowData['lastUpdated']);
+          this.donationEditForm.controls['Month'].setValue(e.rowData['Month']);
+          this.donationEditForm.controls['Others'].setValue(e.rowData['Others']);
+          this.donationEditForm.controls['spendAmount'].setValue(e.rowData['spendAmount']);
+          this.donationEditForm.controls['Year'].setValue(e.rowData['Year']);
+        //this.rowDataClicked1 = e.rowData;
       }
 }

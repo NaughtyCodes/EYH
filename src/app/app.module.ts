@@ -53,7 +53,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UpdateEventResolverService } from './resolvers/update-event-resolver.service';
 import { ManageStoryComponent } from './manage-story/manage-story.component';
 import { ManageDonationComponent } from './manage-donation/manage-donation.component';
-import {RunningBalanceComponent} from './running-balance/running-balance.component'
+import {RunningBalanceComponent} from './running-balance/running-balance.component';
+import {ButtonRendererComponent} from './button-render/button-render.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -82,7 +83,7 @@ export function socialConfigs() {
     WhoweareComponent, 
     WhatwedoComponent, 
     StoryviewComponent, 
-    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent, ManageStoryComponent, ManageDonationComponent,RunningBalanceComponent  
+    UpdateEventsComponent, ReachUsComponent, HomesInfoComponent, UpcomingEventsComponent, ContributeToEYHComponent, JoinToEYHComponent, YourContributionComponent, ManageStoryComponent, ManageDonationComponent,RunningBalanceComponent,ButtonRendererComponent  
   ],  
   imports: [  
     BrowserModule,  
@@ -102,7 +103,7 @@ export function socialConfigs() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ButtonRendererComponent]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],  
   providers: [
