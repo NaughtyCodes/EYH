@@ -34,7 +34,7 @@
       <a *ngIf="_isLoggedIn" class="nav-link bc-white txt-bold">{{this.socialusers.name}} <span class="sr-only"></span></a> 
       <img *ngIf="_isLoggedIn" class="user-img" src="{{this.socialusers.image}}" alt="Avatar"> 
       <button *ngIf="_isLoggedIn" (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Logout</button> 
-      <button *ngIf="!_isLoggedIn" (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Login</button> 
+      <button  ngIf="!_isLoggedIn == " (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 bc-white" >Login</button> 
     </form>
     
   </div>
