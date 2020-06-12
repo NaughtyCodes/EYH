@@ -181,6 +181,54 @@
                               </form>
                             <!-- <p-footer></p-footer> --> 
                           </p-dialog>
+                          <p-dialog [(visible)]="donationViewDisplay" [style]="{width: '80%', height: '500px'}">
+                                <p-header>
+                                    Donation Details View
+                                </p-header>
+                                        <div class="card">
+                                                <div class="card-body">
+                                                        <div class="row">
+                                                                <div class="col-sm-3">
+                                                                        <b>FundRequestedBy</b>
+                                                                        <p>{{fundRequestedBy}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Others</b>
+                                                                        <p>{{others}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3"> 
+                                                                        <b>DonatedDate</b>
+                                                                        <p>{{donatedDate}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>FundReleasedBy</b>
+                                                                        <p>{{fundReleasedBy}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Spend Amount</b>
+                                                                        <p>{{spendAmount}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Month</b>
+                                                                        <p>{{month}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Year</b>
+                                                                        <p>{{year}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Last Updated</b>
+                                                                        <p>{{lastUpdated}}</p>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                        <b>DonatedTo</b>
+                                                                        <p>{{donatedTo}}</p>
+                                                                </div>
+                                                                
+                                                        </div>
+                                                </div>
+                                        </div>
+                              </p-dialog>
             </div>
             <div for="Running-Balance" class="row div-toggel-view hide-tab" >
                         <app-running-balance #test></app-running-balance>
