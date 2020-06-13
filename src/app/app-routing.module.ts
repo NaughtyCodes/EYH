@@ -47,40 +47,35 @@ export const routes: Routes = [
     component: DashboardComponent,    
     data: {    
       title: 'Dashboard Page'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
   },
   {    
     path: 'who-we-are',    
     component: WhoweareComponent,    
     data: {    
       title: 'Who We Are'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
   },
   {    
     path: 'what-we-do',    
     component: DashboardComponent,    
     data: {    
       title: 'What We Do'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
   },
   {    
     path: 'story/:id',    
     component: StoryviewComponent,    
     data: {    
       title: 'View Story'    
-    },
-    canActivate: [AuthGuardGuard]    
+    }
   },
   {    
     path: 'reach-us',    
     component: ReachUsComponent,    
     data: {    
       title: 'Reach Us'    
-    },
-    canActivate: [AuthGuardGuard] 
+    }
   },
   {    
     path: 'upcoming-events',    

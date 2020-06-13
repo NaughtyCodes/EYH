@@ -19,10 +19,10 @@ export class HeaderComponent implements OnInit {
     ) { 
       
     }  
-  ngOnInit() {  
-    this.socialusers = JSON.parse(localStorage.getItem('socialusers'));  
-    //console.log(this.socialusers.image);  
-
+  ngOnInit() {
+    
+    this.socialusers = JSON.parse(localStorage.getItem('socialusers')) === null ? 'public' : JSON.parse(localStorage.getItem('socialusers'));  
+    
     if (this.SocialloginService.getAuthStatus()) {
       this._isLoggedIn = true;
     } else {

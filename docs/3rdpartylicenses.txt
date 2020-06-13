@@ -243,11 +243,15 @@ MIT
 
 primeng/api
 
+primeng/confirmdialog
+
 primeng/dialog
 
 primeng/menu
 
 primeng/tabmenu
+
+primeng/toast
 
 regenerator-runtime
 MIT

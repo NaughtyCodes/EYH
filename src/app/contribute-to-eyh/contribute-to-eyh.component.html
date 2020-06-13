@@ -16,7 +16,7 @@
                 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
                 <div for="List-Payments" class="col-sm-4 form-group row div-toggel-view hide-tab">
                   <select class="form-control"  [(ngModel)]="selectedValue" name="users" rows="1"(change)="changeUser($event)">
-                    <option [ngValue]="choose" disabled>Choose the user</option>
+                    <option>Choose the user</option>
                     <option *ngFor="let user of eyhUsers" [ngValue]="user.emailId">{{user.name}}</option>
                   </select>
                 </div>

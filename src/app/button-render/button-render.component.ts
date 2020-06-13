@@ -16,7 +16,7 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
 
   agInit(params): void {
     this.params = params;
-    //this.label = this.params.label || null;
+    this.label = this.params.label || null;
   }
 
   refresh(params?: any): boolean {
