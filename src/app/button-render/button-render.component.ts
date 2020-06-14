@@ -5,7 +5,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 @Component({
   selector: 'app-button-renderer',
   template: `
-    <button class="btn" style="padding:0px 0px !important;margin-left:-15px" type="button" (click)="onClick($event)"><i class="pi pi-info-circle" style="font-size:1.65em"></i></button>
+    <button class="btn" style="padding:0px 0px !important;margin-left:-15px;color:#00af66" type="button" (click)="onClick($event)"><i class="pi pi-info-circle" style="font-size:1.65em"></i></button>
     `
 })
 
