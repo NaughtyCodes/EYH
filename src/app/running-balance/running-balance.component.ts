@@ -3,7 +3,6 @@ import { PaymentshandlerService } from '../service/paymentshandler.service';
 import { ManageDonationhandlerService } from '../service/managedonationhandler.service';
 @Component({
     selector: 'app-running-balance',
-    // template: `<p>test</p>`,
     templateUrl: './running-balance.component.html',
     styleUrls: ['./running-balance.component.css']
   })
@@ -20,7 +19,6 @@ import { ManageDonationhandlerService } from '../service/managedonationhandler.s
 
     }
     ngOnInit() {
-        //alert("test")
         this.totalContributedAmt();
         this.totalDonatedAmt();
     }
@@ -29,9 +27,7 @@ import { ManageDonationhandlerService } from '../service/managedonationhandler.s
         let d
         this.paymentshandlerService.getPayments().subscribe(data => {
              d = this.paymentshandlerService.paymentMapper(data);
-             console.log(d)
              this.toatlcontributed= d.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
-             console.log(this.toatlcontributed)
           })
     }
     totalDonatedAmt()
@@ -40,7 +36,6 @@ import { ManageDonationhandlerService } from '../service/managedonationhandler.s
         this.managedonationhandlerService.getDonations().subscribe(data => {
         d= this.managedonationhandlerService.donationsMapper(data);
         this.totaldonated= d.map(p => parseInt(p['spendAmount'])).reduce((a,b) => a + b, 0);
-            console.log("data",this.totaldonated)
             this.currentBalanceAmt();
           }, 
           errorCode => {
@@ -49,7 +44,6 @@ import { ManageDonationhandlerService } from '../service/managedonationhandler.s
     }
     currentBalanceAmt(){
         this.currentbalance=this.toatlcontributed-this.totaldonated
-        console.log(this.currentbalance)
     }
     runningBalReload(){
         this.totalContributedAmt();

@@ -33,6 +33,16 @@ export class ManageDonationComponent implements OnInit {
   isReadonlyOthers:boolean=true;
   isOthersEditable:boolean=false;
   isEditable:boolean=true;
+  donationViewDisplay:boolean=false;
+  fundRequestedBy:string;
+  others:string;
+  donatedDate:string;
+  fundReleasedBy:string
+  spendAmount:string;
+  month:string;
+  year:string;
+  lastUpdated:string;
+  donatedTo:string;
 
   eyhUsers: any;
   manageDonationItems: MenuItem[];
@@ -59,12 +69,10 @@ export class ManageDonationComponent implements OnInit {
       }
     }
     addDonationColumnDefs = [
-      {field:'',width:41,
+      {field:'',width:50,
       cellRenderer: 'buttonRenderer',
-      // cellRenderer: (data) => {
-      //   return `<button class="btn" style="padding:1px 6px !important" click="onClick(data)"><i class="pi pi-info-circle" style="font-size:1.50em"></i></button`;
     cellRendererParams: {
-      onClick: this.onBtnClick1.bind(this),
+      onClick: this.donationView.bind(this),
       label: 'click'
     }},
       {field: 'donatedDate', checkboxSelection: true, headerCheckboxSelection: true,editable:true,sortable: true,filter:true },
@@ -82,20 +90,6 @@ export class ManageDonationComponent implements OnInit {
       {field: 'lastUpdated',sortable: true,filter:true},
       {field: 'Others',editable:true,sortable: true,filter:true}
     ]
-   
-    // addDonationRowdata=[
-    //   {
-    //     "Month": "May",
-    //     "Others": "testing",
-    //     "Year": "2020",
-    //     "donatedDate": "2020-05-22",
-    //     "donatedTo": "senthil",
-    //     "fundReleasedBy": "Rajesh",
-    //     "fundRequestedBy": "mohanakrishnan",
-    //     "spendAmount":"1000",
-    //     "lastUpdated": "29-05-2020 11:09:26 PM"
-    //   }
-    // ]
     errorMsg(msg:any) {
       this.messageService.add({severity:'error', summary:'Error Message', detail:msg});
     }
@@ -122,14 +116,10 @@ export class ManageDonationComponent implements OnInit {
       {
         label: 'Running-Balance', 
         command: ($event) => {
-          //this.listDonations()
-          //this.demo.currentBalanceAmt()
-          //this.router.navigate(['/running-balance']);
           this.menuhandlerService.activeDiv($event);
         }
       }
   ];
-    //this.createDonationForm();
   }
   createDonationForm() {
     this.donationForm = this.formBuilder.group({
@@ -150,16 +140,15 @@ export class ManageDonationComponent implements OnInit {
   
   changeUser($event :any){
     let selectedVal=this.donationForm.value['fundRequestedBy']
-    console.log(selectedVal)
     if(selectedVal=="Others")
       {
-        this.isReadonly=false;
+        this.isReadonlyOthers=false;
         this.isOthersEditable=true;
         this.donationForm.controls['Others'].setValue('');
       }
       else
       {
-        this.isReadonly=true;
+        this.isReadonlyOthers=true;
         this.isOthersEditable=false;
         this.donationForm.controls['Others'].setValue('Requested By User');
       }
@@ -183,7 +172,6 @@ export class ManageDonationComponent implements OnInit {
   }
   changeUserEdit($event :any){
     let selectedVal=this.donationEditForm.value['fundRequestedBy']
-    console.log(selectedVal)
     if(selectedVal=="Others")
       {
         this.isReadonlyOthers=false;
@@ -200,7 +188,6 @@ export class ManageDonationComponent implements OnInit {
   listUsers() {
     this.eyhUserhandlerService.getUsers().subscribe(data => {
       this.eyhUsers = this.eyhUserhandlerService.eyhUserMapper(data);
-      console.log("users",this.eyhUsers)
     }, 
     errorCode => {
       console.log(errorCode);
@@ -225,7 +212,6 @@ export class ManageDonationComponent implements OnInit {
       'spendAmount': this.donationForm.value['spendAmount'],
       'Year': this.donationForm.value['Year']
       }
-      console.log(managedonations)
       
       this.managedonationhandlerService.addDonation(managedonations).then( _ => {
         console.log("Record Inserted..!");
@@ -241,7 +227,6 @@ export class ManageDonationComponent implements OnInit {
     listDonations() {
       this.managedonationhandlerService.getDonations().subscribe(data => {
         this.addDonationRowdata = this.managedonationhandlerService.donationsMapper(data);
-        console.log("data",this.addDonationRowdata)
       }, 
       errorCode => {
         console.log(errorCode);
@@ -250,7 +235,6 @@ export class ManageDonationComponent implements OnInit {
     getAllDoantions(){
       this.managedonationhandlerService.getAllDonations().subscribe(data => {
         this.addDonationRowdata = this.managedonationhandlerService.donationsMapper(data);
-        console.log("data",this.addDonationRowdata)
       }, 
       errorCode => {
         console.log(errorCode);
@@ -294,7 +278,6 @@ export class ManageDonationComponent implements OnInit {
                   'spendAmount':r['spendAmount'],
                   'Year':r['Year']
                   }
-                  console.log(updatedata)
                   this.managedonationhandlerService.updateDonation(rowid.toString(),updatedata).then( _ => {
                   console.log("Record Updated..!");
                   if(selectedRow.length==index+1)
@@ -329,10 +312,8 @@ export class ManageDonationComponent implements OnInit {
         this.isReadonly=false;
         this.isEditable=true;
         this.donationEditForm.controls['fundRequestedBy'].enable()
-        selectedRow.forEach((r,index) => {
+        selectedRow.forEach(r => {
         let rowid=r["id"]
-        console.log(rowid)
-        console.log(index)
         this.donationEditForm.controls['donatedid'].setValue(rowid);
         this.donationEditForm.controls['donatedDate'].setValue(r['donatedDate']);
         this.donationEditForm.controls['donatedTo'].setValue(r['donatedTo']);
@@ -367,7 +348,6 @@ export class ManageDonationComponent implements OnInit {
           'spendAmount': this.donationEditForm.value['spendAmount'],
           'Year': this.donationEditForm.value['Year']
           }
-          console.log(updatedoantion)
           this.managedonationhandlerService.updateDonation(donationid.toString(),updatedoantion).then( _ => {
             console.log("Record Updated..!")
               this.successMsg(msg1)
@@ -393,7 +373,6 @@ export class ManageDonationComponent implements OnInit {
         {
           
           this.delconfirm(msg2,selectedRow)
-          console.log(this.isDelete)
         }
       }
       delconfirm(msg:any,selectedRow:any) {
@@ -420,22 +399,16 @@ export class ManageDonationComponent implements OnInit {
             }
         });
       }
-      onBtnClick1(e) {
-        this.donationFormDisplay=true
-        console.log(e)
-        this.isReadonly=true;
-        this.isEditable=false;
-        this.donationEditForm.controls['fundRequestedBy'].disable();
-        this.donationEditForm.controls['donatedid'].setValue(e.rowData['id']);
-          this.donationEditForm.controls['donatedDate'].setValue(e.rowData['donatedDate']);
-          this.donationEditForm.controls['donatedTo'].setValue(e.rowData['donatedTo']);
-          this.donationEditForm.controls['fundReleasedBy'].setValue(e.rowData['fundReleasedBy']);
-          this.donationEditForm.controls['fundRequestedBy'].setValue(e.rowData['fundRequestedBy']);
-          this.donationEditForm.controls['lastUpdated'].setValue(e.rowData['lastUpdated']);
-          this.donationEditForm.controls['Month'].setValue(e.rowData['Month']);
-          this.donationEditForm.controls['Others'].setValue(e.rowData['Others']);
-          this.donationEditForm.controls['spendAmount'].setValue(e.rowData['spendAmount']);
-          this.donationEditForm.controls['Year'].setValue(e.rowData['Year']);
-        //this.rowDataClicked1 = e.rowData;
+      donationView(e) {
+        this.fundRequestedBy=e.rowData['fundRequestedBy'];
+        this.others=e.rowData['Others'];
+        this.donatedDate=e.rowData['donatedDate'];
+        this.fundReleasedBy=e.rowData['fundReleasedBy'];
+        this.spendAmount=e.rowData['spendAmount'];
+        this.month=e.rowData['Month'];
+        this.year=e.rowData['Year'];
+        this.lastUpdated=e.rowData['lastUpdated'];
+        this.donatedTo=e.rowData['donatedTo'];
+        this.donationViewDisplay=true
       }
 }

@@ -1,8 +1,11 @@
 .bg-primary-cus{
-    background-color: #5696db !important;
+    background: linear-gradient(to right, #4cbb17 1%, #228b22 100%) !important;
 }
 .bg-danger-cus{
-    background-color: #e84d5b !important;
+    background: linear-gradient(to right, #228b22 1%, #006400 100%) !important;
+}
+.bg-info-cus{
+    background-color: #006400 !important;
 }
 .card-header,thead{
     color: white !important;

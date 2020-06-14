@@ -79,7 +79,6 @@ export class YourContributionComponent implements OnInit {
             r['name']  = user['name'];
             this.paymentshandlerService.getPaymentsByUser(user['id'].toString(), formatDate(new Date(), 'yyyy', 'en-US', '+0530'))
             .subscribe(p => {
-              //console.log(JSON.stringify(p));
               r['total'] = p.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
               r['months'] = {};
               months.forEach(m => {
@@ -87,12 +86,10 @@ export class YourContributionComponent implements OnInit {
                 .filter(p=>p['month'] === m)
                 .map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
               });
-              console.log(JSON.stringify(r['months']));
               payments.push(r);
               this.contribution['year']     = formatDate(new Date(), 'yyyy', 'en-US', '+0530');
               this.contribution['sumTotal'] = payments.map(p => parseInt(p['total'])).reduce((a,b) => a + b, 0);
               this.contribution['payments'] = payments;
-              console.log(JSON.stringify(this.contribution));
               this.isPaymentTableLoaded = payments.length === u.length;
             });
           });

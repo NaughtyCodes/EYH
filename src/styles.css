@@ -25,17 +25,13 @@
     color:#25282a !important;
 }
 
-body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
-    background-color: #f4f4f4 !important;
-    border: 1px solid #c8c8c8 !important;
-}
-
-body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover {
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active,body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover {
     background-color: #00af66 !important;
     border: 1px solid #00af66 !important; 
+    color:white !important;
 }
 
-body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover > a{
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover > a,body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active>a{
     color: white !important;
 }
 
@@ -198,7 +194,7 @@ table > tr:nth-child(odd) {
 }
 
 /*--------------------------------------*/
-.btn-color{
+.btn-color,body .ui-button{
     background: #00af66 !important;
     border-color: #00af66 !important;
 }
@@ -208,4 +204,23 @@ table > tr:nth-child(odd) {
     color: white;
     background-color: #00af66;
     padding: 1px 6px !important;
+}
+/*Ag gird color change*/
+.ag-theme-alpine .ag-header {
+    background-color: #00af66 !important;
+}
+.ag-theme-alpine .ag-header-row{
+    color: white !important
+}
+.ag-theme-alpine .ag-header-icon {
+    color:  white !important;
+}
+.ag-theme-alpine .ag-checkbox-input-wrapper.ag-checked::after {
+    content: "\f106";
+    color: #00af66 !important;
+}
+/*dialog box*/
+body .ui-dialog .ui-dialog-titlebar,body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon:hover,body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon{
+    background-color: #00af66 !important;
+    color: white !important;
 }
