@@ -23,7 +23,7 @@
                 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
                 <div for="Add-Donations" class="row div-toggel-view hide-tab" >
                 <form [formGroup]="donationForm">
-                    <div class="card">
+                    <div class="card" style="height:400px;overflow: auto;">
                             <div class="card-body">
                                     <div class="row">
                                             <div class="col-sm-5 form-group">
@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="col-sm-7 form-group">
                                                     <label for="Others">Others<span *ngIf="isOthersEditable" class="indicator">*</span></label>
-                                                    <input class="form-control" name="Others" formControlName="Others"  rows="2" id="Others" placeholder="Enter other request.." [readonly]="isReadonly"
+                                                    <input class="form-control" name="Others" formControlName="Others"  rows="2" id="Others" placeholder="Enter other request.." [readonly]="isReadonlyOthers"
                                                     [ngClass]="{'is-invalid': submitted && fval.Others.errors }"/>
                                                     <div *ngIf="submitted && fval.Others.errors" class="invalid-feedback">
                                                             <div *ngIf="fval.Others.errors.required">Please enter the others details</div>
@@ -181,6 +181,54 @@
                               </form>
                             <!-- <p-footer></p-footer> --> 
                           </p-dialog>
+                          <p-dialog [(visible)]="donationViewDisplay" [style]="{width: '80%', height: '500px'}">
+                                <p-header>
+                                    Donation Details View
+                                </p-header>
+                                        <div class="card">
+                                                <div class="card-body">
+                                                        <div class="row">
+                                                                <div class="col-sm-3">
+                                                                        <b>FundRequestedBy</b>
+                                                                        <p>{{fundRequestedBy}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Others</b>
+                                                                        <p>{{others}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3"> 
+                                                                        <b>DonatedDate</b>
+                                                                        <p>{{donatedDate}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>FundReleasedBy</b>
+                                                                        <p>{{fundReleasedBy}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Spend Amount</b>
+                                                                        <p>{{spendAmount}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Month</b>
+                                                                        <p>{{month}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Year</b>
+                                                                        <p>{{year}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <b>Last Updated</b>
+                                                                        <p>{{lastUpdated}}</p>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                        <b>DonatedTo</b>
+                                                                        <p>{{donatedTo}}</p>
+                                                                </div>
+                                                                
+                                                        </div>
+                                                </div>
+                                        </div>
+                              </p-dialog>
             </div>
             <div for="Running-Balance" class="row div-toggel-view hide-tab" >
                         <app-running-balance #test></app-running-balance>
