@@ -1,18 +1,20 @@
 <!-- <app-header></app-header> -->
-<div class="container">
+<div class="container story-main-area">
     <div class="row">
       <div class="col-sm-4">
-        <h3>Stories - List</h3>
-        
+        <div class="row">
+          <h3>Stories - List</h3>
+        </div>
         <!-- <p-tree [value]="files"></p-tree> -->
 
       </div>
       <div class="col-sm-8">
-          <div class="row">
+
+        <div class="row">
                 <h3>{{story.storyTitle}}</h3>
-          </div>
-          <div class="row">
-                <div id="demo" class="carousel slide" data-ride="carousel" >
+        </div>
+        <div class="row">
+                <div id="demo" class="carousel slide story-main-banner" data-ride="carousel" >
     
                         <!-- Indicators -->
                         <ul class="carousel-indicators">
@@ -28,7 +30,7 @@
                               display: block;
                               max-width:760px;
                               max-height:390px;
-                              width: auto;
+                              
                               height: auto;">
                           </div>
                         </div>
@@ -43,14 +45,15 @@
                   </div>
         </div>
 
-          <div class="row">
-                <h5>{{story.storyTitle}}</h5>
-                <div>
-                  <p>
-                    {{story.story}}
-                  </p>
-                </div>
-          </div>
+        <div class="row story-main-pannel">
+              <h5>{{story.storyTitle}}</h5>
+              <div>
+                <p class="story-inner-para">
+                  {{story.story}}
+                </p>
+              </div>
+        </div>
+      
       </div>
     </div>
   </div>

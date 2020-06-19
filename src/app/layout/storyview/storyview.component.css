@@ -1,3 +1,22 @@
+.story-main-area {
+  padding: 0em 2em 0em 2em;
+}
+
+.story-main-pannel {
+  margin-top: 1em;
+}
+
+.story-main-banner {
+  margin-top: 1em;
+}
+.story-inner-para {
+  margin-top: 1em;
+}
+
+.story-main-heading {
+  
+}
+
 .carousel-inner img {
     width: 100%;
     height: 100%;
